@@ -5,6 +5,7 @@ var terminal_vel : int = 1000
 @export var jump_height : int = 500
 
 @export var water : bool = false
+var climbable : bool = false
 
 func _physics_process(delta):
 	if !water:
@@ -23,10 +24,18 @@ func _physics_process(delta):
 		if Input.get_axis("down", "up") == 0:
 			velocity.y += gravity * delta
 	
-	if Input.is_action_just_pressed("interact"):
-		if water:
-			water = false
-		else:
-			water = true
+	if global_position.y > 200 and !water:
+		water = true
+	if global_position.y < 200 and water:
+		water = false
+		
+	if Input.is_action_pressed("up") and climbable:
+		velocity.y -= 25
 	
 	move_and_slide()
+
+func _dock_climable(_body):
+	climbable = true
+
+func _dock_unclimbable(_body):
+	climbable = false
