@@ -7,6 +7,12 @@ var terminal_vel : int = 1000
 @export var water : bool = false
 var climbable : bool = false
 
+@onready var sprite : AnimatedSprite2D = $AnimatedSprite2D
+var facing : String = "right"
+
+func _ready():
+	sprite.play("idle")
+
 func _physics_process(delta):
 	if !water:
 		# Platforming/Land
@@ -33,6 +39,20 @@ func _physics_process(delta):
 		velocity.y -= 25
 	
 	move_and_slide()
+
+func _process(_delta):
+	# TODO: make animation change run on input AND if axis ==
+	# and replace spritesheet with updated ver
+	if Input.get_axis("left", "right") != 0:
+		sprite.play("walk")
+	else:
+		sprite.play("idle")
+	if Input.get_axis("left", "right") == -1 and facing == "right":
+		facing = "left"
+		sprite.flip_h = true
+	elif Input.get_axis("left", "right") == 1 and facing == "left":
+		facing = "right"
+		sprite.flip_h = false
 
 func _dock_climable(_body):
 	climbable = true
