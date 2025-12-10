@@ -1,8 +1,8 @@
 extends CharacterBody2D
-@export var speed : int = 260
+@export var speed : int = 200
 @export var gravity : int = 1000
 var terminal_vel : int = 1000
-@export var jump_height : int = 500
+@export var jump_height : int = 400
 
 @export var water : bool = false
 var climbable : bool = false
@@ -14,6 +14,8 @@ func _ready():
 	sprite.play("idle")
 
 func _physics_process(delta):
+	
+	
 	if !water:
 		# Platforming/Land
 		if velocity.y < terminal_vel:
@@ -23,12 +25,17 @@ func _physics_process(delta):
 		velocity.x = Input.get_axis("left", "right") * speed
 		if Input.is_action_just_pressed("up") and is_on_floor() == true:
 			velocity.y = -jump_height
+	
+	
+	
 	else:
 		# Swimming/Water
 		velocity += Input.get_vector("left", "right", "up", "down") * speed / 4
 		velocity -= Vector2(velocity.x / 5, velocity.y / 5)
 		if Input.get_axis("down", "up") == 0:
 			velocity.y += gravity * delta
+	
+	
 	
 	if global_position.y > 200 and !water:
 		water = true
@@ -41,8 +48,6 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _process(_delta):
-	# TODO: make animation change run on input AND if axis ==
-	# and replace spritesheet with updated ver
 	if Input.get_axis("left", "right") != 0:
 		sprite.play("walk")
 	else:
@@ -50,7 +55,7 @@ func _process(_delta):
 	if Input.get_axis("left", "right") == -1 and facing == "right":
 		facing = "left"
 		sprite.flip_h = true
-	elif Input.get_axis("left", "right") == 1 and facing == "left":
+	if Input.get_axis("left", "right") == 1 and facing == "left":
 		facing = "right"
 		sprite.flip_h = false
 
