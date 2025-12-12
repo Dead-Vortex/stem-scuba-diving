@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://d5bpips75sth"]
+[gd_scene load_steps=7 format=3 uid="uid://d5bpips75sth"]
 
 [ext_resource type="PackedScene" uid="uid://cgwfckhcnlryo" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://bfcyk2hhalhey" path="res://assets/godot.svg" id="2_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://ovb8pxx3o1jy" path="res://scenes/npc.tscn" id="2_sugp2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5qli"]
 size = Vector2(626, 137)
@@ -14,28 +15,32 @@ size = Vector2(4.25, 100)
 
 [node name="Node2D" type="Node2D"]
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_o5qli")]
+[node name="Player" parent="." node_paths=PackedStringArray("npc") instance=ExtResource("1_o5qli")]
+npc = NodePath("../NPC")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="NPC" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_sugp2")]
+position = Vector2(233, 67)
+player = NodePath("../Player")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="Platform" type="StaticBody2D" parent="."]
 position = Vector2(0, 200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
 shape = SubResource("RectangleShape2D_o5qli")
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(-2.0980835e-05, 200)
+[node name="Sprite2D" type="Sprite2D" parent="Platform"]
 scale = Vector2(4.8906245, 1.0625)
 texture = ExtResource("2_0wfyh")
 
-[node name="ClimbUpZone" type="Area2D" parent="."]
+[node name="ClimbUpZone" type="Area2D" parent="Platform"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ClimbUpZone"]
-position = Vector2(-317, 200)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform/ClimbUpZone"]
+position = Vector2(-317, 0)
 shape = SubResource("RectangleShape2D_0wfyh")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="ClimbUpZone"]
-position = Vector2(317, 200)
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Platform/ClimbUpZone"]
+position = Vector2(317, 0)
 shape = SubResource("RectangleShape2D_sugp2")
 
-[connection signal="body_entered" from="ClimbUpZone" to="CharacterBody2D" method="_dock_climable"]
-[connection signal="body_exited" from="ClimbUpZone" to="CharacterBody2D" method="_dock_unclimbable"]
+[connection signal="body_entered" from="Platform/ClimbUpZone" to="Player" method="_dock_climbable"]
+[connection signal="body_exited" from="Platform/ClimbUpZone" to="Player" method="_dock_unclimbable"]

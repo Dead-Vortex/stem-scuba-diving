@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://nahy1mdbswcw" path="res://assets/guy_sp.png" id="2_g2els"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhqgy"]
-radius = 24.0
-height = 48.0
+radius = 22.0
+height = 50.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
 atlas = ExtResource("2_g2els")
@@ -118,10 +118,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D"]
+z_index = 2
 script = ExtResource("1_g2els")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_qhqgy")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -129,6 +132,7 @@ position_smoothing_enabled = true
 position_smoothing_speed = 3.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 4)
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_3vyb7")
 animation = &"idle"

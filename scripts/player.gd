@@ -1,4 +1,6 @@
 extends CharacterBody2D
+
+# Movement Variables
 @export var speed : int = 200
 @export var gravity : int = 1000
 var terminal_vel : int = 1000
@@ -7,14 +9,17 @@ var terminal_vel : int = 1000
 @export var water : bool = false
 var climbable : bool = false
 
+# Animation Variables
 @onready var sprite : AnimatedSprite2D = $AnimatedSprite2D
 var facing : String = "right"
+
+# Interaction Variables
+@export var npc : Node2D
 
 func _ready():
 	sprite.play("idle")
 
 func _physics_process(delta):
-	
 	
 	if !water:
 		# Platforming/Land
@@ -22,10 +27,13 @@ func _physics_process(delta):
 			velocity.y += gravity * delta
 		else:
 			velocity.y = terminal_vel
-		velocity.x = Input.get_axis("left", "right") * speed
-		if Input.is_action_just_pressed("up") and is_on_floor() == true:
-			velocity.y = -jump_height
-	
+			
+		if !npc.is_player_interacting:
+			velocity.x = Input.get_axis("left", "right") * speed
+			if Input.is_action_just_pressed("up") and is_on_floor() == true:
+				velocity.y = -jump_height
+		else:
+			velocity.x = 0
 	
 	
 	else:
@@ -48,18 +56,21 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _process(_delta):
-	if Input.get_axis("left", "right") != 0:
-		sprite.play("walk")
+	if !npc.is_player_interacting:
+		if Input.get_axis("left", "right") != 0:
+			sprite.play("walk")
+		else:
+			sprite.play("idle")
+		if Input.get_axis("left", "right") == -1 and facing == "right":
+			facing = "left"
+			sprite.flip_h = true
+		if Input.get_axis("left", "right") == 1 and facing == "left":
+			facing = "right"
+			sprite.flip_h = false
 	else:
 		sprite.play("idle")
-	if Input.get_axis("left", "right") == -1 and facing == "right":
-		facing = "left"
-		sprite.flip_h = true
-	if Input.get_axis("left", "right") == 1 and facing == "left":
-		facing = "right"
-		sprite.flip_h = false
 
-func _dock_climable(_body):
+func _dock_climbable(_body):
 	climbable = true
 
 func _dock_unclimbable(_body):
