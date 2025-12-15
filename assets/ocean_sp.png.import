@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvox8duocylkp"
-path="res://.godot/imported/PLACEHOLDER_water.png-ade2fa7c4b2b8f8878ae971da24e9090.ctex"
+uid="uid://b2uoak7crb2vv"
+path="res://.godot/imported/ocean_sp.png-3426464e5e242e1975705fec359269eb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/PLACEHOLDER_water.png"
-dest_files=["res://.godot/imported/PLACEHOLDER_water.png-ade2fa7c4b2b8f8878ae971da24e9090.ctex"]
+source_file="res://assets/ocean_sp.png"
+dest_files=["res://.godot/imported/ocean_sp.png-3426464e5e242e1975705fec359269eb.ctex"]
 
 [params]
 
