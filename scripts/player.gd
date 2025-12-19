@@ -41,7 +41,7 @@ func _physics_process(delta):
 		velocity += Input.get_vector("left", "right", "up", "down") * speed / 4
 		velocity -= Vector2(velocity.x / 5, velocity.y / 5)
 		if Input.get_axis("down", "up") == 0:
-			velocity.y += gravity * delta
+			velocity.y += gravity / 2.5 * delta
 	
 	
 	

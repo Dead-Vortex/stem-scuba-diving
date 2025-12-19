@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://d1volvmou6dee" path="res://assets/buttons/E_Key_Dark.png" id="3_rv78h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nh2m4"]
-size = Vector2(56.5, 140)
+size = Vector2(174, 140)
 
 [node name="NPC" type="Node2D"]
 script = ExtResource("1_abqhh")
@@ -17,14 +17,68 @@ texture = ExtResource("2_rv78h")
 [node name="InteractZone" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractZone"]
-position = Vector2(-77.25, -4)
+position = Vector2(-68, -4)
 shape = SubResource("RectangleShape2D_nh2m4")
 
 [node name="ButtonPrompt" type="Sprite2D" parent="."]
 visible = false
+z_index = 3
 position = Vector2(-29, -49.999992)
 scale = Vector2(0.585, 0.585)
 texture = ExtResource("3_rv78h")
+
+[node name="Shop" type="Control" parent="."]
+visible = false
+z_index = 5
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Shop"]
+layout_mode = 0
+offset_left = -235.0
+offset_top = -173.0
+offset_right = 25.0
+offset_bottom = -33.0
+
+[node name="Panel" type="Panel" parent="Shop/MarginContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Shop/MarginContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Shop/MarginContainer/Control"]
+layout_mode = 0
+offset_right = 260.0
+offset_bottom = 140.0
+text = "hello world! test ui/gui? i guess it's technically a gui and also technically a ui. someone help
+"
+scroll_active = false
+scroll_following_visible_characters = true
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="TextSpeed" type="Timer" parent="Shop/MarginContainer/Control/RichTextLabel"]
+wait_time = 0.1
+
+[node name="BoxContainer" type="BoxContainer" parent="Shop"]
+layout_mode = 0
+offset_left = -235.0
+offset_top = -173.0
+offset_right = 25.0
+offset_bottom = -33.0
+alignment = 1
+
+[node name="Button" type="Button" parent="Shop/BoxContainer"]
+layout_mode = 2
+text = "Buy Oxygen Tank"
+
+[node name="Button2" type="Button" parent="Shop/BoxContainer"]
+layout_mode = 2
+text = "Buy Flippers"
 
 [connection signal="body_entered" from="InteractZone" to="." method="_player_enters_npc_interact_zone"]
 [connection signal="body_exited" from="InteractZone" to="." method="_player_exits_npc_interact_zone"]
