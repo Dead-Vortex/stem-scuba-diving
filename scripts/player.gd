@@ -16,10 +16,15 @@ var facing : String = "right"
 # Interaction Variables
 @export var npc : Node2D
 
-func _ready():
+# Oxygen Variables
+@export var max_oxygen : int = 30
+var oxygen : int = max_oxygen
+@onready var oxygen_timer : Timer = $OxygenTimer
+
+func _ready() -> void:
 	sprite.play("idle")
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	
 	if !water:
 		# Platforming/Land
@@ -47,15 +52,19 @@ func _physics_process(delta):
 	
 	if global_position.y > 200 and !water:
 		water = true
+		oxygen_timer.start(1)
 	if global_position.y < 200 and water:
 		water = false
+		oxygen_timer.stop()
+		replenish_oxygen()
+		
 		
 	if Input.is_action_pressed("up") and climbable:
 		velocity.y -= 25
 	
 	move_and_slide()
 
-func _process(_delta):
+func _process(_delta) -> void:
 	if !npc.is_player_interacting:
 		if Input.get_axis("left", "right") != 0:
 			sprite.play("walk")
@@ -70,8 +79,18 @@ func _process(_delta):
 	else:
 		sprite.play("idle")
 
-func _dock_climbable(_body):
+func _on_oxygen_tick() -> void:
+	oxygen -= 1
+	if oxygen < 1:
+		global_position = Vector2(0, 0)
+	
+func replenish_oxygen() -> void:
+	while oxygen < max_oxygen and !water:
+		await get_tree().create_timer(0.05).timeout
+		oxygen += 1
+
+func _dock_climbable(_body) -> void:
 	climbable = true
 
-func _dock_unclimbable(_body):
+func _dock_unclimbable(_body) -> void:
 	climbable = false

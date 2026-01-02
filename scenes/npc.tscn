@@ -32,44 +32,23 @@ visible = false
 z_index = 5
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -235.0
+offset_top = -173.0
+offset_right = -195.0
+offset_bottom = -133.0
 
 [node name="MarginContainer" type="MarginContainer" parent="Shop"]
 layout_mode = 0
-offset_left = -235.0
-offset_top = -173.0
-offset_right = 25.0
-offset_bottom = -33.0
+offset_right = 260.0
+offset_bottom = 140.0
 
 [node name="Panel" type="Panel" parent="Shop/MarginContainer"]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="Shop/MarginContainer"]
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Shop/MarginContainer/Control"]
+[node name="BoxContainer" type="BoxContainer" parent="Shop"]
 layout_mode = 0
 offset_right = 260.0
 offset_bottom = 140.0
-text = "hello world! test ui/gui? i guess it's technically a gui and also technically a ui. someone help
-"
-scroll_active = false
-scroll_following_visible_characters = true
-horizontal_alignment = 1
-vertical_alignment = 1
-visible_characters = 0
-visible_ratio = 0.0
-
-[node name="TextSpeed" type="Timer" parent="Shop/MarginContainer/Control/RichTextLabel"]
-wait_time = 0.1
-
-[node name="BoxContainer" type="BoxContainer" parent="Shop"]
-layout_mode = 0
-offset_left = -235.0
-offset_top = -173.0
-offset_right = 25.0
-offset_bottom = -33.0
 alignment = 1
 
 [node name="Button" type="Button" parent="Shop/BoxContainer"]
@@ -79,6 +58,17 @@ text = "Buy Oxygen Tank"
 [node name="Button2" type="Button" parent="Shop/BoxContainer"]
 layout_mode = 2
 text = "Buy Flippers"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Shop"]
+layout_mode = 0
+offset_left = 46.865
+offset_top = -28.09
+offset_right = 209.865
+offset_bottom = -0.7550087
+text = "Press [E] to exit"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="body_entered" from="InteractZone" to="." method="_player_enters_npc_interact_zone"]
 [connection signal="body_exited" from="InteractZone" to="." method="_player_exits_npc_interact_zone"]

@@ -28,15 +28,9 @@ func open_shop():
 		player.sprite.flip_h = true
 		
 	shop_ui.visible = true
-	#scroll_text("Hello i am an npc :D")
 func close_shop():
 	shop_ui.visible = false
-	
-func scroll_text(text):
-	$Shop/MarginContainer/RichTextLabel.text = text
-	$Shop/MarginContainer/RichTextLabel.visible_characters = 0
-	for _i in text.length():
-		$Shop/MarginContainer/RichTextLabel.visible_characters += 1
+
 
 func _player_enters_npc_interact_zone(body):
 	if body == player:
