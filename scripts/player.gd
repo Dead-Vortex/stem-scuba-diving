@@ -6,7 +6,7 @@ extends CharacterBody2D
 var terminal_vel : int = 1000
 @export var jump_height : int = 400
 
-@export var water : bool = false
+var water : bool = false
 var climbable : bool = false
 
 # Animation Variables
@@ -17,9 +17,11 @@ var facing : String = "right"
 @export var npc : Node2D
 
 # Oxygen Variables
-@export var max_oxygen : int = 30
+var max_oxygen : int = 30
 var oxygen : int = max_oxygen
 @onready var oxygen_timer : Timer = $OxygenTimer
+
+var trash : int = 0
 
 func _ready() -> void:
 	sprite.play("idle")
