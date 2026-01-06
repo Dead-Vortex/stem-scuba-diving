@@ -16,7 +16,7 @@ collision_layer = 4
 shape = SubResource("CircleShape2D_exrr5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.15, 0.15)
 texture = ExtResource("1_3xixx")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_trash_collected"]

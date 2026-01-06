@@ -42,9 +42,3 @@ func _player_exits_npc_interact_zone(body) -> void:
 	if body == player:
 		is_player_interactable = false
 		button.visible = false
-
-
-func spawn_garbage() -> void:
-	pass
-	#https://docs.godotengine.org/en/stable/tutorials/scripting/nodes_and_scene_instances.html
-	# do this tomorrow, imporpnant
