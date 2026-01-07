@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://d1volvmou6dee" path="res://assets/buttons/E_Key_Dark.png" id="3_rv78h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nh2m4"]
-size = Vector2(174, 140)
+size = Vector2(174, 5)
 
 [node name="NPC" type="Node2D"]
 script = ExtResource("1_abqhh")
@@ -17,7 +17,7 @@ texture = ExtResource("2_rv78h")
 [node name="InteractZone" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractZone"]
-position = Vector2(-68, -4)
+position = Vector2(-68, 63.5)
 shape = SubResource("RectangleShape2D_nh2m4")
 
 [node name="ButtonPrompt" type="Sprite2D" parent="."]
@@ -37,38 +37,33 @@ offset_top = -173.0
 offset_right = -195.0
 offset_bottom = -133.0
 
-[node name="MarginContainer" type="MarginContainer" parent="Shop"]
+[node name="PanelContainer" type="PanelContainer" parent="Shop"]
 layout_mode = 0
-offset_right = 260.0
-offset_bottom = 140.0
+offset_right = 250.0
+offset_bottom = 139.0
 
-[node name="Panel" type="Panel" parent="Shop/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/PanelContainer"]
 layout_mode = 2
 
-[node name="BoxContainer" type="BoxContainer" parent="Shop"]
-layout_mode = 0
-offset_right = 260.0
-offset_bottom = 140.0
+[node name="BoxContainer" type="HBoxContainer" parent="Shop/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 alignment = 1
 
-[node name="Button" type="Button" parent="Shop/BoxContainer"]
+[node name="SellTrash" type="Button" parent="Shop/PanelContainer/VBoxContainer/BoxContainer"]
 layout_mode = 2
-text = "Buy Oxygen Tank"
+size_flags_horizontal = 3
+text = "Sell Trash"
 
-[node name="Button2" type="Button" parent="Shop/BoxContainer"]
+[node name="BuyUpgrades" type="Button" parent="Shop/PanelContainer/VBoxContainer/BoxContainer"]
 layout_mode = 2
-text = "Buy Flippers"
+size_flags_horizontal = 3
+text = "Buy Upgrades"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Shop"]
-layout_mode = 0
-offset_left = 46.865
-offset_top = -28.09
-offset_right = 209.865
-offset_bottom = -0.7550087
-text = "Press [E] to exit"
-scroll_active = false
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Exit" type="Button" parent="Shop/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exit"
 
 [connection signal="body_entered" from="InteractZone" to="." method="_player_enters_npc_interact_zone"]
 [connection signal="body_exited" from="InteractZone" to="." method="_player_exits_npc_interact_zone"]
+[connection signal="pressed" from="Shop/PanelContainer/VBoxContainer/Exit" to="." method="_on_exit_shop_button_pressed"]
