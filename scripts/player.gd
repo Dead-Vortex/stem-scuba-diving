@@ -57,6 +57,7 @@ func _physics_process(delta) -> void:
 		oxygen_timer.start(1)
 	if global_position.y < 200 and water:
 		water = false
+#		velocity.y -= 300
 		oxygen_timer.stop()
 		replenish_oxygen()
 		
