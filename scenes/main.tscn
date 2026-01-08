@@ -1,12 +1,12 @@
-[gd_scene load_steps=14 format=4 uid="uid://d5bpips75sth"]
+[gd_scene load_steps=16 format=4 uid="uid://d5bpips75sth"]
 
 [ext_resource type="PackedScene" uid="uid://cgwfckhcnlryo" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://ovb8pxx3o1jy" path="res://scenes/npc.tscn" id="2_sugp2"]
 [ext_resource type="Texture2D" uid="uid://bpejpu1plflfp" path="res://assets/dock.png" id="3_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://b2uoak7crb2vv" path="res://assets/ocean_sp.png" id="4_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://713fnmlh3vc" path="res://assets/pylons.png" id="4_tefeu"]
-[ext_resource type="Texture2D" uid="uid://547wa426jfyk" path="res://assets/sky.png" id="5_o6xl0"]
 [ext_resource type="Script" uid="uid://bsfujhylxwlek" path="res://scripts/spawntrash.gd" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://cq586umyq5xnd" path="res://scenes/mobile_ui.tscn" id="6_o6xl0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5qli"]
 size = Vector2(626, 57)
@@ -16,6 +16,13 @@ size = Vector2(4.25, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sugp2"]
 size = Vector2(4.25, 50)
+
+[sub_resource type="Gradient" id="Gradient_tefeu"]
+offsets = PackedFloat32Array(0.23333333, 0.7266667)
+colors = PackedColorArray(0.61960787, 0.8352941, 0.8745098, 1, 0.21960784, 0.42745098, 0.62352943, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o6xl0"]
+gradient = SubResource("Gradient_tefeu")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jyhfs"]
 texture = ExtResource("4_jyhfs")
@@ -98,9 +105,10 @@ shape = SubResource("RectangleShape2D_sugp2")
 
 [node name="Sky" type="Sprite2D" parent="."]
 z_index = -10
-position = Vector2(-162.50137, 337)
-scale = Vector2(5.4019523, 8.977778)
-texture = ExtResource("5_o6xl0")
+position = Vector2(0, 1500)
+rotation = 1.5707964
+scale = Vector2(17.515, 14000)
+texture = SubResource("GradientTexture1D_o6xl0")
 
 [node name="Water" type="TileMapLayer" parent="."]
 modulate = Color(1, 1, 1, 0.5019608)
@@ -127,6 +135,9 @@ shape = SubResource("RectangleShape2D_jyhfs")
 position = Vector2(24000, -9000)
 scale = Vector2(0.5866885, 56.986675)
 shape = SubResource("RectangleShape2D_jyhfs")
+
+[node name="TouchScreenUI" parent="." instance=ExtResource("6_o6xl0")]
+visible = false
 
 [node name="TrashSpawner" type="Node" parent="."]
 script = ExtResource("5_tbgi4")

@@ -37,7 +37,7 @@ func _physics_process(delta) -> void:
 			
 		if !npc.is_player_interacting:
 			velocity.x = Input.get_axis("left", "right") * speed
-			if Input.is_action_just_pressed("up") and is_on_floor() == true:
+			if Input.is_action_just_pressed("jump") and is_on_floor() == true:
 				velocity.y = -jump_height
 		else:
 			velocity.x = 0
@@ -73,10 +73,10 @@ func _process(_delta) -> void:
 			sprite.play("walk")
 		else:
 			sprite.play("idle")
-		if Input.get_axis("left", "right") == -1 and facing == "right":
+		if Input.get_axis("left", "right") < 0 and facing == "right":
 			facing = "left"
 			sprite.flip_h = true
-		if Input.get_axis("left", "right") == 1 and facing == "left":
+		if Input.get_axis("left", "right") > 0 and facing == "left":
 			facing = "right"
 			sprite.flip_h = false
 	else:

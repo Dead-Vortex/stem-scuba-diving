@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://cq586umyq5xnd"]
+
+[ext_resource type="Texture2D" uid="uid://d1volvmou6dee" path="res://assets/buttons/E_Key_Dark.png" id="1_0rmtg"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="1_2oyvj"]
+[ext_resource type="Script" uid="uid://dmv3rhhttfoa" path="res://scripts/touchscreen.gd" id="1_uqj2s"]
+[ext_resource type="Texture2D" uid="uid://cv5d1qaa0u5nm" path="res://assets/buttons/E_Key_Light.png" id="3_hxaye"]
+[ext_resource type="Texture2D" uid="uid://drcmtbn0pi2iu" path="res://assets/buttons/Space_Key_Dark.png" id="4_ll7hi"]
+[ext_resource type="Texture2D" uid="uid://bwdy7vdckmo7r" path="res://assets/buttons/Space_Key_Light.png" id="5_uqj2s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2oyvj"]
+size = Vector2(100, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ri1lb"]
+size = Vector2(100, 55)
+
+[node name="TouchScreenUI" type="CanvasLayer"]
+script = ExtResource("1_uqj2s")
+
+[node name="Virtual Joystick" parent="." instance=ExtResource("1_2oyvj")]
+visibility_mode = 1
+action_left = "left"
+action_right = "right"
+action_up = "up"
+action_down = "down"
+
+[node name="Interact" type="TouchScreenButton" parent="Virtual Joystick"]
+position = Vector2(900, 100)
+scale = Vector2(1.12, 1.12)
+texture_normal = ExtResource("1_0rmtg")
+texture_pressed = ExtResource("3_hxaye")
+shape = SubResource("RectangleShape2D_2oyvj")
+action = "interact"
+visibility_mode = 1
+
+[node name="Jump" type="TouchScreenButton" parent="Virtual Joystick"]
+position = Vector2(1060, 65)
+scale = Vector2(1.8100004, 1.8100004)
+texture_normal = ExtResource("4_ll7hi")
+texture_pressed = ExtResource("5_uqj2s")
+shape = SubResource("RectangleShape2D_ri1lb")
+action = "jump"
+visibility_mode = 1
