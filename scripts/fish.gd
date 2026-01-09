@@ -1,8 +1,17 @@
 extends Node2D
 @onready var sprite = get_node("Sprite2D")
 
+var speed : int = randi_range(45, 60)
+var dir : String = "left"
+
 func _ready() -> void:
 	sprite.modulate = Color(randf_range(0, 1), randf_range(0, 1), randf_range(0, 1), 1)
+	if randi_range(1, 2) == 1:
+		dir = "left"
+		sprite.flip_h = false
+	else:
+		dir = "right"
+		sprite.flip_h = true
 	
 func _process(delta: float) -> void:
-	global_position.x -= 50 * delta
+	global_position.x += (speed if dir == "right" else -speed) * delta

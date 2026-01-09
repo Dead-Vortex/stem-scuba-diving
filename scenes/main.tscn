@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b2uoak7crb2vv" path="res://assets/ocean_sp.png" id="4_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://713fnmlh3vc" path="res://assets/pylons.png" id="4_tefeu"]
 [ext_resource type="Script" uid="uid://bsfujhylxwlek" path="res://scripts/spawntrash.gd" id="5_tbgi4"]
-[ext_resource type="PackedScene" uid="uid://c1pnr1kmk5njs" path="res://scenes/fish.tscn" id="7_o6xl0"]
+[ext_resource type="Script" uid="uid://r1xyp03vud73" path="res://scripts/spawnfish.gd" id="7_o6xl0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5qli"]
 size = Vector2(626, 57)
@@ -139,11 +139,8 @@ shape = SubResource("RectangleShape2D_jyhfs")
 [node name="TrashSpawner" type="Node" parent="."]
 script = ExtResource("5_tbgi4")
 
-[node name="Fish" parent="." instance=ExtResource("7_o6xl0")]
-position = Vector2(461, 510)
-
-[node name="Fish2" parent="." instance=ExtResource("7_o6xl0")]
-position = Vector2(-609, 328)
+[node name="FishSpawner" type="Node" parent="."]
+script = ExtResource("7_o6xl0")
 
 [connection signal="body_entered" from="Platform/ClimbUpZone" to="Player" method="_dock_climbable"]
 [connection signal="body_exited" from="Platform/ClimbUpZone" to="Player" method="_dock_unclimbable"]
