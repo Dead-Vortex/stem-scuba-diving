@@ -62,7 +62,7 @@ func _physics_process(delta) -> void:
 		replenish_oxygen()
 		
 		
-	if Input.is_action_pressed("up") and climbable:
+	if (Input.is_action_pressed("up") or Input.is_action_pressed("jump")) and climbable:
 		velocity.y -= 25
 	
 	move_and_slide()
