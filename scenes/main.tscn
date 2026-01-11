@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://d5bpips75sth"]
+[gd_scene load_steps=17 format=4 uid="uid://d5bpips75sth"]
 
 [ext_resource type="PackedScene" uid="uid://cgwfckhcnlryo" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://ovb8pxx3o1jy" path="res://scenes/npc.tscn" id="2_sugp2"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://713fnmlh3vc" path="res://assets/pylons.png" id="4_tefeu"]
 [ext_resource type="Script" uid="uid://bsfujhylxwlek" path="res://scripts/spawntrash.gd" id="5_tbgi4"]
 [ext_resource type="Script" uid="uid://r1xyp03vud73" path="res://scripts/spawnfish.gd" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://cq586umyq5xnd" path="res://scenes/mobile_ui.tscn" id="8_tipki"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5qli"]
 size = Vector2(626, 57)
@@ -18,8 +19,8 @@ size = Vector2(4.25, 50)
 size = Vector2(4.25, 50)
 
 [sub_resource type="Gradient" id="Gradient_tefeu"]
-offsets = PackedFloat32Array(0.23333333, 0.7266667)
-colors = PackedColorArray(0.61960787, 0.8352941, 0.8745098, 1, 0.21960784, 0.42745098, 0.62352943, 1)
+offsets = PackedFloat32Array(0.20666666, 0.32, 0.7866667, 1)
+colors = PackedColorArray(0.61960787, 0.8352941, 0.8745098, 1, 0.21960784, 0.42745098, 0.62352943, 1, 1.4529471e-05, 0.01875026, 0.14338231, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_o6xl0"]
 gradient = SubResource("Gradient_tefeu")
@@ -141,6 +142,9 @@ script = ExtResource("5_tbgi4")
 
 [node name="FishSpawner" type="Node" parent="."]
 script = ExtResource("7_o6xl0")
+
+[node name="TouchScreenUI" parent="." instance=ExtResource("8_tipki")]
+visible = false
 
 [connection signal="body_entered" from="Platform/ClimbUpZone" to="Player" method="_dock_climbable"]
 [connection signal="body_exited" from="Platform/ClimbUpZone" to="Player" method="_dock_unclimbable"]
