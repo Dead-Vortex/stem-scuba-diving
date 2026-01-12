@@ -41,3 +41,18 @@ func _player_exits_npc_interact_zone(body) -> void:
 
 func _on_exit_shop_button_pressed() -> void:
 	close_shop()
+
+func _on_trash_sold() -> void:
+	player.money += player.trash * 2 * 1000
+	player.trash = 0
+
+func _on_flipper_bought() -> void:
+	if player.money >= 10:
+		player.money -= 10
+		player.swim_speed += 10
+
+func _on_oxygen_bought() -> void:
+	if player.money >= 30:
+		player.money -= 30
+		player.oxygen = player.max_oxygen + 15
+		player.max_oxygen += 15

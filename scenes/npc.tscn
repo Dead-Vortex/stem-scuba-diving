@@ -45,20 +45,31 @@ offset_bottom = 139.0
 [node name="VBoxContainer" type="VBoxContainer" parent="Shop/PanelContainer"]
 layout_mode = 2
 
-[node name="BoxContainer" type="HBoxContainer" parent="Shop/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Shop/PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="SellTrash" type="Button" parent="Shop/PanelContainer/VBoxContainer/BoxContainer"]
+[node name="SellTrash" type="Button" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Sell Trash"
 
-[node name="BuyUpgrades" type="Button" parent="Shop/PanelContainer/VBoxContainer/BoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-text = "Buy Upgrades"
+
+[node name="FlipperBuy" type="Button" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Buy Flipper
+Upgrade"
+
+[node name="TankBuy" type="Button" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Buy Oxygen
+Tank Upgrade"
 
 [node name="Exit" type="Button" parent="Shop/PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -66,4 +77,7 @@ text = "Exit"
 
 [connection signal="body_entered" from="InteractZone" to="." method="_player_enters_npc_interact_zone"]
 [connection signal="body_exited" from="InteractZone" to="." method="_player_exits_npc_interact_zone"]
+[connection signal="pressed" from="Shop/PanelContainer/VBoxContainer/HBoxContainer/SellTrash" to="." method="_on_trash_sold"]
+[connection signal="pressed" from="Shop/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/FlipperBuy" to="." method="_on_flipper_bought"]
+[connection signal="pressed" from="Shop/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/TankBuy" to="." method="_on_oxygen_bought"]
 [connection signal="pressed" from="Shop/PanelContainer/VBoxContainer/Exit" to="." method="_on_exit_shop_button_pressed"]

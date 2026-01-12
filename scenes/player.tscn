@@ -125,6 +125,8 @@ collision_mask = 5
 script = ExtResource("1_g2els")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+limit_bottom = 3270
+limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
 editor_draw_limits = true

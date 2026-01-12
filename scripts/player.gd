@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 # Movement Variables
 @export var speed : int = 200
+@export var swim_speed : int = 200
 @export var gravity : int = 1000
 var terminal_vel : int = 1000
 @export var jump_height : int = 400
@@ -22,6 +23,7 @@ var oxygen : int = max_oxygen
 @onready var oxygen_timer : Timer = $OxygenTimer
 
 var trash : int = 0
+var money : int = 0
 
 func _ready() -> void:
 	sprite.play("idle")
@@ -45,7 +47,7 @@ func _physics_process(delta) -> void:
 	
 	else:
 		# Swimming/Water
-		velocity += Input.get_vector("left", "right", "up", "down") * speed / 4
+		velocity += Input.get_vector("left", "right", "up", "down") * swim_speed / 4
 		velocity -= Vector2(velocity.x / 5, velocity.y / 5)
 		if Input.get_axis("down", "up") == 0:
 			velocity.y += gravity / 2.5 * delta
