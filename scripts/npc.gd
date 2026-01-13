@@ -3,7 +3,9 @@ extends Node2D
 @onready var interact_zone : Area2D = $InteractZone
 @onready var button : Sprite2D = $ButtonPrompt
 @export var player : CharacterBody2D
-@onready var shop_ui : Control = $Shop
+@onready var ui : Control = $Shop
+@onready var ui_select = $"Shop/PanelContainer/Shop Selection"
+@onready var ui_questions = $Shop/PanelContainer/Questions
 var is_player_interactable : bool = false
 var is_player_interacting : bool = false
 
@@ -21,12 +23,16 @@ func open_shop() -> void:
 		player.facing = "left"
 		player.sprite.flip_h = true
 		
-	shop_ui.visible = true
+	ui.visible = true
+	ui_select.visible = true
 
 func close_shop() -> void:
 	is_player_interacting = false
 	button.visible = true
-	shop_ui.visible = false
+	ui.visible = false
+	ui_select.visible = false
+	ui_questions.visible = false
+	
 
 
 func _player_enters_npc_interact_zone(body) -> void:
@@ -46,12 +52,12 @@ func _on_trash_sold() -> void:
 	player.money += round(player.trash * 2 * randf_range(0.9, 1.2))
 	player.trash = 0
 func _on_flipper_bought() -> void:
-	if player.money >= 30:
-		player.money -= 30
-		player.swim_speed += 5
+	if player.money >= 20:
+		player.money -= 20
+		player.swim_speed += 3
 
 func _on_oxygen_bought() -> void:
-	if player.money >= 100:
-		player.money -= 100
+	if player.money >= 75:
+		player.money -= 75
 		player.oxygen = player.max_oxygen + 15
 		player.max_oxygen += 15

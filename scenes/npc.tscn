@@ -42,42 +42,108 @@ layout_mode = 0
 offset_right = 250.0
 offset_bottom = 139.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Shop/PanelContainer"]
+[node name="Shop Selection" type="VBoxContainer" parent="Shop/PanelContainer"]
+visible = false
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Shop/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Shop/PanelContainer/Shop Selection"]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="SellTrash" type="Button" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="SellTrash" type="Button" parent="Shop/PanelContainer/Shop Selection/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Sell Trash"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/PanelContainer/Shop Selection/HBoxContainer"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+alignment = 1
 
-[node name="FlipperBuy" type="Button" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="FlipperBuy" type="Button" parent="Shop/PanelContainer/Shop Selection/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Buy Flipper
 Upgrade"
 
-[node name="TankBuy" type="Button" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="TankBuy" type="Button" parent="Shop/PanelContainer/Shop Selection/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Buy Oxygen
 Tank Upgrade"
 
-[node name="Exit" type="Button" parent="Shop/PanelContainer/VBoxContainer"]
+[node name="Exit" type="Button" parent="Shop/PanelContainer/Shop Selection"]
+custom_minimum_size = Vector2(0, 31)
 layout_mode = 2
 text = "Exit"
 
+[node name="Questions" type="VBoxContainer" parent="Shop/PanelContainer"]
+visible = false
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Shop/PanelContainer/Questions"]
+custom_minimum_size = Vector2(0, 47.5)
+layout_mode = 2
+text = "What is the square root of apple?"
+horizontal_alignment = 1
+
+[node name="Answers" type="HBoxContainer" parent="Shop/PanelContainer/Questions"]
+layout_mode = 2
+alignment = 1
+
+[node name="Column1" type="VBoxContainer" parent="Shop/PanelContainer/Questions/Answers"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="Answer1" type="Button" parent="Shop/PanelContainer/Questions/Answers/Column1"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Seed?"
+autowrap_mode = 1
+
+[node name="Answer3" type="Button" parent="Shop/PanelContainer/Questions/Answers/Column1"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Mr. Kim i need a good grade"
+autowrap_mode = 1
+
+[node name="Column2" type="VBoxContainer" parent="Shop/PanelContainer/Questions/Answers"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="Answer2" type="Button" parent="Shop/PanelContainer/Questions/Answers/Column2"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "1"
+autowrap_mode = 1
+
+[node name="Answer4" type="Button" parent="Shop/PanelContainer/Questions/Answers/Column2"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "√apple"
+autowrap_mode = 1
+
+[node name="Result" type="VBoxContainer" parent="Shop/PanelContainer"]
+visible = false
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Shop/PanelContainer/Result"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Correct/Incorrect!
+
+n/10 Correct"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextQuestion" type="Button" parent="Shop/PanelContainer/Result"]
+layout_mode = 2
+text = "Next Question"
+
 [connection signal="body_entered" from="InteractZone" to="." method="_player_enters_npc_interact_zone"]
 [connection signal="body_exited" from="InteractZone" to="." method="_player_exits_npc_interact_zone"]
-[connection signal="pressed" from="Shop/PanelContainer/VBoxContainer/HBoxContainer/SellTrash" to="." method="_on_trash_sold"]
-[connection signal="pressed" from="Shop/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/FlipperBuy" to="." method="_on_flipper_bought"]
-[connection signal="pressed" from="Shop/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/TankBuy" to="." method="_on_oxygen_bought"]
-[connection signal="pressed" from="Shop/PanelContainer/VBoxContainer/Exit" to="." method="_on_exit_shop_button_pressed"]
+[connection signal="pressed" from="Shop/PanelContainer/Shop Selection/HBoxContainer/SellTrash" to="." method="_on_trash_sold"]
+[connection signal="pressed" from="Shop/PanelContainer/Shop Selection/HBoxContainer/VBoxContainer/FlipperBuy" to="." method="_on_flipper_bought"]
+[connection signal="pressed" from="Shop/PanelContainer/Shop Selection/HBoxContainer/VBoxContainer/TankBuy" to="." method="_on_oxygen_bought"]
+[connection signal="pressed" from="Shop/PanelContainer/Shop Selection/Exit" to="." method="_on_exit_shop_button_pressed"]
