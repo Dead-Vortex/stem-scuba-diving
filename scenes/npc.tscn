@@ -28,14 +28,13 @@ scale = Vector2(0.585, 0.585)
 texture = ExtResource("3_rv78h")
 
 [node name="Shop" type="Control" parent="."]
-visible = false
 z_index = 5
 layout_mode = 3
 anchors_preset = 0
-offset_left = -235.0
-offset_top = -173.0
-offset_right = -195.0
-offset_bottom = -133.0
+offset_left = -151.0
+offset_top = -202.0
+offset_right = -111.0
+offset_bottom = -162.0
 
 [node name="PanelContainer" type="PanelContainer" parent="Shop"]
 layout_mode = 0
@@ -43,7 +42,6 @@ offset_right = 250.0
 offset_bottom = 139.0
 
 [node name="Shop Selection" type="VBoxContainer" parent="Shop/PanelContainer"]
-visible = false
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Shop/PanelContainer/Shop Selection"]

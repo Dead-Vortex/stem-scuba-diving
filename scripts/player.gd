@@ -15,7 +15,8 @@ var climbable : bool = false
 var facing : String = "right"
 
 # Interaction Variables
-@export var npc : Node2D
+@export var npc1 : Node2D
+@export var npc2 : Node2D
 
 # Oxygen Variables
 var max_oxygen : int = 30
@@ -37,7 +38,7 @@ func _physics_process(delta) -> void:
 		else:
 			velocity.y = terminal_vel
 			
-		if !npc.is_player_interacting:
+		if !npc1.is_player_interacting and !npc2.is_player_interacting:
 			velocity.x = Input.get_axis("left", "right") * speed
 			if Input.is_action_just_pressed("jump") and is_on_floor() == true:
 				velocity.y = -jump_height
@@ -70,7 +71,7 @@ func _physics_process(delta) -> void:
 	move_and_slide()
 
 func _process(_delta) -> void:
-	if !npc.is_player_interacting:
+	if !npc1.is_player_interacting and !npc2.is_player_interacting:
 		if Input.get_axis("left", "right") != 0:
 			sprite.play("walk")
 		else:

@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=4 uid="uid://d5bpips75sth"]
+[gd_scene load_steps=19 format=4 uid="uid://d5bpips75sth"]
 
 [ext_resource type="PackedScene" uid="uid://cgwfckhcnlryo" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://ovb8pxx3o1jy" path="res://scenes/npc.tscn" id="2_sugp2"]
+[ext_resource type="PackedScene" uid="uid://lurw44fu8lpy" path="res://scenes/shopkeepeer.tscn" id="3_choun"]
 [ext_resource type="Texture2D" uid="uid://bpejpu1plflfp" path="res://assets/dock.png" id="3_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://b2uoak7crb2vv" path="res://assets/ocean_sp.png" id="4_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://713fnmlh3vc" path="res://assets/pylons.png" id="4_tefeu"]
@@ -72,11 +73,16 @@ size = Vector2(560, 332)
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Player" parent="." node_paths=PackedStringArray("npc") instance=ExtResource("1_o5qli")]
-npc = NodePath("../NPC")
+[node name="Player" parent="." node_paths=PackedStringArray("npc1", "npc2") instance=ExtResource("1_o5qli")]
+npc1 = NodePath("../NPC")
+npc2 = NodePath("../NPC2")
 
 [node name="NPC" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_sugp2")]
 position = Vector2(233, 90)
+player = NodePath("../Player")
+
+[node name="NPC2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_choun")]
+position = Vector2(-129.805, 91)
 player = NodePath("../Player")
 
 [node name="Platform" type="StaticBody2D" parent="."]

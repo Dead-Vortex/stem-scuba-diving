@@ -1,0 +1,101 @@
+[gd_scene load_steps=5 format=3 uid="uid://lurw44fu8lpy"]
+
+[ext_resource type="Script" uid="uid://bc4fgc530aho4" path="res://scripts/npc2.gd" id="1_hsi6i"]
+[ext_resource type="Texture2D" uid="uid://1xnn0126v8fs" path="res://assets/shopkeep.png" id="2_hsi6i"]
+[ext_resource type="Texture2D" uid="uid://d1volvmou6dee" path="res://assets/buttons/E_Key_Dark.png" id="3_8fi03"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nh2m4"]
+size = Vector2(92, 5)
+
+[node name="NPC2" type="Node2D"]
+script = ExtResource("1_hsi6i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-110, 5)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_hsi6i")
+
+[node name="InteractZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractZone"]
+position = Vector2(-99, 60.5)
+shape = SubResource("RectangleShape2D_nh2m4")
+
+[node name="ButtonPrompt" type="Sprite2D" parent="."]
+visible = false
+z_index = 3
+position = Vector2(-110, -80)
+scale = Vector2(0.585, 0.585)
+texture = ExtResource("3_8fi03")
+
+[node name="Shop" type="Control" parent="."]
+z_index = 5
+layout_mode = 3
+anchors_preset = 0
+offset_left = -236.0
+offset_top = -297.0
+offset_right = -196.0
+offset_bottom = -257.0
+
+[node name="PanelContainer" type="PanelContainer" parent="Shop"]
+layout_mode = 0
+offset_right = 265.0
+offset_bottom = 219.0
+
+[node name="Shop Selection" type="VBoxContainer" parent="Shop/PanelContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Shop/PanelContainer/Shop Selection"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/PanelContainer/Shop Selection/HBoxContainer"]
+custom_minimum_size = Vector2(114.17, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="FlipperBuy" type="Button" parent="Shop/PanelContainer/Shop Selection/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Flipper Upgrade"
+autowrap_mode = 2
+
+[node name="TankBuy" type="Button" parent="Shop/PanelContainer/Shop Selection/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Oxygen Tank Upgrade"
+autowrap_mode = 2
+
+[node name="InfoBox" type="VBoxContainer" parent="Shop/PanelContainer/Shop Selection/HBoxContainer"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Shop/PanelContainer/Shop Selection/HBoxContainer/InfoBox"]
+custom_minimum_size = Vector2(120, 27.445)
+layout_mode = 2
+text = "Buy Upgrades"
+horizontal_alignment = 1
+
+[node name="ShopItemInfo" type="RichTextLabel" parent="Shop/PanelContainer/Shop Selection/HBoxContainer/InfoBox"]
+custom_minimum_size = Vector2(0, 118.55)
+layout_mode = 2
+text = "Flipper Upgrade:
+Increases Swim Speed by 5%"
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Shop/PanelContainer/Shop Selection/HBoxContainer/InfoBox"]
+layout_mode = 2
+text = "Buy (Ð0)"
+
+[node name="Exit" type="Button" parent="Shop/PanelContainer/Shop Selection"]
+custom_minimum_size = Vector2(0, 31)
+layout_mode = 2
+text = "Exit"
+
+[connection signal="body_entered" from="InteractZone" to="." method="_player_enters_npc_interact_zone"]
+[connection signal="body_exited" from="InteractZone" to="." method="_player_exits_npc_interact_zone"]
+[connection signal="pressed" from="Shop/PanelContainer/Shop Selection/HBoxContainer/VBoxContainer/FlipperBuy" to="." method="_on_flipper_bought"]
+[connection signal="pressed" from="Shop/PanelContainer/Shop Selection/HBoxContainer/VBoxContainer/TankBuy" to="." method="_on_oxygen_bought"]
+[connection signal="pressed" from="Shop/PanelContainer/Shop Selection/Exit" to="." method="_on_exit_shop_button_pressed"]

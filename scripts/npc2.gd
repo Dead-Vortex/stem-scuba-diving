@@ -16,12 +16,12 @@ func _process(_delta) -> void:
 func open_shop() -> void:
 	is_player_interacting = true
 	button.visible = false
-	if player.global_position.x < 200:
-		player.facing = "right"
-		player.sprite.flip_h = false
-	else:
+	if player.global_position.x > -255:
 		player.facing = "left"
 		player.sprite.flip_h = true
+	else:
+		player.facing = "right"
+		player.sprite.flip_h = false
 		
 	ui.visible = true
 	ui_select.visible = true
@@ -49,12 +49,12 @@ func _on_exit_shop_button_pressed() -> void:
 	close_shop()
 
 func _on_trash_sold() -> void:
-	player.money += round(player.trash * 2 * randf_range(0.9, 1.2) * 1000000)
+	player.money += round(player.trash * 2 * randf_range(0.9, 1.2))
 	player.trash = 0
 func _on_flipper_bought() -> void:
 	if player.money >= 20:
 		player.money -= 20
-		player.swim_speed += 5
+		player.swim_speed += 3
 
 func _on_oxygen_bought() -> void:
 	if player.money >= 75:
