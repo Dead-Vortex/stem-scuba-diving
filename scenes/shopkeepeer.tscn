@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://d1volvmou6dee" path="res://assets/buttons/E_Key_Dark.png" id="3_8fi03"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nh2m4"]
-size = Vector2(92, 5)
+size = Vector2(131, 5)
 
 [node name="NPC2" type="Node2D"]
 script = ExtResource("1_hsi6i")
@@ -18,7 +18,7 @@ texture = ExtResource("2_hsi6i")
 [node name="InteractZone" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractZone"]
-position = Vector2(-99, 60.5)
+position = Vector2(-79.5, 60.5)
 shape = SubResource("RectangleShape2D_nh2m4")
 
 [node name="ButtonPrompt" type="Sprite2D" parent="."]
@@ -29,6 +29,7 @@ scale = Vector2(0.585, 0.585)
 texture = ExtResource("3_8fi03")
 
 [node name="Shop" type="Control" parent="."]
+visible = false
 z_index = 5
 layout_mode = 3
 anchors_preset = 0
@@ -39,63 +40,64 @@ offset_bottom = -257.0
 
 [node name="PanelContainer" type="PanelContainer" parent="Shop"]
 layout_mode = 0
-offset_right = 265.0
+offset_left = -33.0
+offset_right = 288.0
 offset_bottom = 219.0
 
-[node name="Shop Selection" type="VBoxContainer" parent="Shop/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/PanelContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Shop/PanelContainer/Shop Selection"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Shop/PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Shop/PanelContainer/Shop Selection/HBoxContainer"]
-custom_minimum_size = Vector2(114.17, 0)
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(116.18, 0)
 layout_mode = 2
-alignment = 1
 
-[node name="FlipperBuy" type="Button" parent="Shop/PanelContainer/Shop Selection/HBoxContainer/VBoxContainer"]
+[node name="FlipperBuy" type="Button" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Flipper Upgrade"
 autowrap_mode = 2
 
-[node name="TankBuy" type="Button" parent="Shop/PanelContainer/Shop Selection/HBoxContainer/VBoxContainer"]
+[node name="TankBuy" type="Button" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Oxygen Tank Upgrade"
 autowrap_mode = 2
 
-[node name="InfoBox" type="VBoxContainer" parent="Shop/PanelContainer/Shop Selection/HBoxContainer"]
-custom_minimum_size = Vector2(140, 0)
+[node name="InfoBox" type="VBoxContainer" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(190.47, 0)
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Shop/PanelContainer/Shop Selection/HBoxContainer/InfoBox"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer/InfoBox"]
 custom_minimum_size = Vector2(120, 27.445)
 layout_mode = 2
 text = "Buy Upgrades"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="ShopItemInfo" type="RichTextLabel" parent="Shop/PanelContainer/Shop Selection/HBoxContainer/InfoBox"]
+[node name="ShopItemInfo" type="RichTextLabel" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer/InfoBox"]
 custom_minimum_size = Vector2(0, 118.55)
 layout_mode = 2
-text = "Flipper Upgrade:
-Increases Swim Speed by 5%"
 autowrap_mode = 2
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Shop/PanelContainer/Shop Selection/HBoxContainer/InfoBox"]
+[node name="PurchaseButton" type="Button" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer/InfoBox"]
 layout_mode = 2
 text = "Buy (Ð0)"
 
-[node name="Exit" type="Button" parent="Shop/PanelContainer/Shop Selection"]
+[node name="Exit" type="Button" parent="Shop/PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 31)
 layout_mode = 2
 text = "Exit"
 
 [connection signal="body_entered" from="InteractZone" to="." method="_player_enters_npc_interact_zone"]
 [connection signal="body_exited" from="InteractZone" to="." method="_player_exits_npc_interact_zone"]
-[connection signal="pressed" from="Shop/PanelContainer/Shop Selection/HBoxContainer/VBoxContainer/FlipperBuy" to="." method="_on_flipper_bought"]
-[connection signal="pressed" from="Shop/PanelContainer/Shop Selection/HBoxContainer/VBoxContainer/TankBuy" to="." method="_on_oxygen_bought"]
-[connection signal="pressed" from="Shop/PanelContainer/Shop Selection/Exit" to="." method="_on_exit_shop_button_pressed"]
+[connection signal="pressed" from="Shop/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/FlipperBuy" to="." method="_on_flipper_upgrade_selected"]
+[connection signal="pressed" from="Shop/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/TankBuy" to="." method="_on_oxygen_upgrade_selected"]
+[connection signal="pressed" from="Shop/PanelContainer/VBoxContainer/HBoxContainer/InfoBox/PurchaseButton" to="." method="_on_purchased"]
+[connection signal="pressed" from="Shop/PanelContainer/VBoxContainer/Exit" to="." method="_on_exit_shop_button_pressed"]

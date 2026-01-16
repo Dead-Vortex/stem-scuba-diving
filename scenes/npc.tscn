@@ -37,41 +37,28 @@ offset_right = -111.0
 offset_bottom = -162.0
 
 [node name="PanelContainer" type="PanelContainer" parent="Shop"]
-layout_mode = 0
-offset_right = 250.0
-offset_bottom = 139.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 6.2500005
+anchor_bottom = 3.4750001
+offset_right = -1.5258789e-05
 
-[node name="Shop Selection" type="VBoxContainer" parent="Shop/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/PanelContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Shop/PanelContainer/Shop Selection"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Shop/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 67.4)
 layout_mode = 2
-size_flags_vertical = 3
-alignment = 1
+text = "answer my quiz and i will give you doubloons for upgrades"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="SellTrash" type="Button" parent="Shop/PanelContainer/Shop Selection/HBoxContainer"]
+[node name="SellTrash" type="Button" parent="Shop/PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Sell Trash"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Shop/PanelContainer/Shop Selection/HBoxContainer"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-alignment = 1
-
-[node name="FlipperBuy" type="Button" parent="Shop/PanelContainer/Shop Selection/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-text = "Buy Flipper
-Upgrade"
-
-[node name="TankBuy" type="Button" parent="Shop/PanelContainer/Shop Selection/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-text = "Buy Oxygen
-Tank Upgrade"
-
-[node name="Exit" type="Button" parent="Shop/PanelContainer/Shop Selection"]
+[node name="Exit" type="Button" parent="Shop/PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 31)
 layout_mode = 2
 text = "Exit"
@@ -98,13 +85,13 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Seed?"
-autowrap_mode = 1
+autowrap_mode = 2
 
 [node name="Answer3" type="Button" parent="Shop/PanelContainer/Questions/Answers/Column1"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "Mr. Kim i need a good grade"
-autowrap_mode = 1
+autowrap_mode = 2
 
 [node name="Column2" type="VBoxContainer" parent="Shop/PanelContainer/Questions/Answers"]
 custom_minimum_size = Vector2(120, 0)
@@ -114,13 +101,13 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "1"
-autowrap_mode = 1
+autowrap_mode = 2
 
 [node name="Answer4" type="Button" parent="Shop/PanelContainer/Questions/Answers/Column2"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 text = "√apple"
-autowrap_mode = 1
+autowrap_mode = 2
 
 [node name="Result" type="VBoxContainer" parent="Shop/PanelContainer"]
 visible = false
@@ -141,7 +128,5 @@ text = "Next Question"
 
 [connection signal="body_entered" from="InteractZone" to="." method="_player_enters_npc_interact_zone"]
 [connection signal="body_exited" from="InteractZone" to="." method="_player_exits_npc_interact_zone"]
-[connection signal="pressed" from="Shop/PanelContainer/Shop Selection/HBoxContainer/SellTrash" to="." method="_on_trash_sold"]
-[connection signal="pressed" from="Shop/PanelContainer/Shop Selection/HBoxContainer/VBoxContainer/FlipperBuy" to="." method="_on_flipper_bought"]
-[connection signal="pressed" from="Shop/PanelContainer/Shop Selection/HBoxContainer/VBoxContainer/TankBuy" to="." method="_on_oxygen_bought"]
-[connection signal="pressed" from="Shop/PanelContainer/Shop Selection/Exit" to="." method="_on_exit_shop_button_pressed"]
+[connection signal="pressed" from="Shop/PanelContainer/VBoxContainer/SellTrash" to="." method="_on_trash_sold"]
+[connection signal="pressed" from="Shop/PanelContainer/VBoxContainer/Exit" to="." method="_on_exit_shop_button_pressed"]

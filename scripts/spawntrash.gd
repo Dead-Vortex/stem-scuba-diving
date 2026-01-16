@@ -1,6 +1,7 @@
 extends Node
 
 var trash = preload("res://scenes/trash.tscn")
+@export var initial_count : int = 100
 var sprites = [preload("res://assets/trash/trash1.png"), preload("res://assets/trash/trash2.png")]
 
 func spawn_garbage(count) -> void:
@@ -11,4 +12,4 @@ func spawn_garbage(count) -> void:
 		trash_instance.get_node("Sprite2D").set_texture(sprites.pick_random())
 
 func _ready() -> void:
-	spawn_garbage(100)
+	spawn_garbage(initial_count)

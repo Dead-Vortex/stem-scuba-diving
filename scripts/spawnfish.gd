@@ -1,6 +1,7 @@
 extends Node
 
 var fish = preload("res://scenes/fish.tscn")
+@export var initial_count : int = 20
 
 func spawn_fish(count) -> void:
 	for i in count:
@@ -10,4 +11,4 @@ func spawn_fish(count) -> void:
 
 
 func _ready() -> void:
-	spawn_fish(100)
+	spawn_fish(initial_count)
