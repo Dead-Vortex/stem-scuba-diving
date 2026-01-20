@@ -9,12 +9,20 @@ extends Node2D
 var is_player_interactable : bool = false
 var is_player_interacting : bool = false
 
-var questions : Array = [["What color is mr kims heart", "Red", "Blue", "Black", "Not Applicable"], ["Who is henry jarvis", "leader of the uncivil american movement", "brother", "Felix Hart?", "australian turkey"]]
+var questions : Array = [
+	# Format for adding new questions:
+	# ["Question", "Correct Answer", "Incorrect 1", "Incorrect 2", "Incorrect 3"]
+	# Add a comma after each question!
+["What color is the ocean?", "Blue", "Purple", "Orange", "Merange"],
+["What currency does this game use?", "Doubloons", "Dollars", "Euros", "Trash"],
+]
+
 @onready var question_text = $Shop/PanelContainer/Questions/RichTextLabel
 @onready var quiz_b1 = $Shop/PanelContainer/Questions/Answers/Column1/Answer1
 @onready var quiz_b2 = $Shop/PanelContainer/Questions/Answers/Column2/Answer2
 @onready var quiz_b3 = $Shop/PanelContainer/Questions/Answers/Column1/Answer3
 @onready var quiz_b4 = $Shop/PanelContainer/Questions/Answers/Column2/Answer4
+var selected_answer : String
 
 func _process(_delta) -> void:
 	if Input.is_action_just_pressed("interact") and is_player_interactable and !is_player_interacting:
@@ -64,7 +72,15 @@ func _on_trash_sold() -> void:
 
 func ask_question(index):
 	question_text.text = questions[index][0]
-	quiz_b1.text = questions[index][1]
-	quiz_b2.text = questions[index][2]
-	quiz_b3.text = questions[index][3]
-	quiz_b4.text = questions[index][4]
+	var answers_temp = [questions[index][1], questions[index][2], questions[index][3], questions[index][4]]
+	var correct_answer_temp = answers_temp[0]
+	answers_temp.shuffle()
+	quiz_b1.text = answers_temp[0]
+	quiz_b2.text = answers_temp[1]
+	quiz_b3.text = answers_temp[2]
+	quiz_b4.text = answers_temp[3]
+	await(quiz_b1.pressed or quiz_b2.pressed or quiz_b3.pressed or quiz_b4.pressed)
+	if true:
+		print("asddf?? idk what this code is bro")
+	else:
+		print("haha u gots wrong lmao")
