@@ -28,7 +28,6 @@ scale = Vector2(0.585, 0.585)
 texture = ExtResource("3_rv78h")
 
 [node name="Shop" type="Control" parent="."]
-visible = false
 z_index = 5
 layout_mode = 3
 anchors_preset = 0

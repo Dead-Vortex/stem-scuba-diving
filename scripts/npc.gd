@@ -22,7 +22,10 @@ var questions : Array = [
 @onready var quiz_b2 = $Shop/PanelContainer/Questions/Answers/Column2/Answer2
 @onready var quiz_b3 = $Shop/PanelContainer/Questions/Answers/Column1/Answer3
 @onready var quiz_b4 = $Shop/PanelContainer/Questions/Answers/Column2/Answer4
-var selected_answer : String
+var selected_button : int
+var education_modifier : float = 1
+var correctness : bool = false
+signal answered
 
 func _process(_delta) -> void:
 	if Input.is_action_just_pressed("interact") and is_player_interactable and !is_player_interacting:
@@ -63,14 +66,21 @@ func _on_exit_shop_button_pressed() -> void:
 	close_shop()
 
 func _on_trash_sold() -> void:
-	ui_select.visible = false
-	ui_questions.visible = true
-	ask_question(randi_range(0, 1))
-	player.money += round(player.trash * 2 * randf_range(0.9, 1.2))
-	player.trash = 0
+	if player.trash != 0:
+		ui_select.visible = false
+		ui_questions.visible = true
+		education_modifier = 1
+		for _i in range(5):
+			correctness = await(ask_question(randi_range(0, 1)))
+			if correctness:
+				education_modifier += 0.2
+		print(str(int((education_modifier - 1) * 5)) + "/5 correct")
+		close_shop()
+		player.money += round(player.trash * education_modifier * randf_range(0.9, 1.2))
+		player.trash = 0
 
 
-func ask_question(index):
+func ask_question(index) -> bool:
 	question_text.text = questions[index][0]
 	var answers_temp = [questions[index][1], questions[index][2], questions[index][3], questions[index][4]]
 	var correct_answer_temp = answers_temp[0]
@@ -79,8 +89,24 @@ func ask_question(index):
 	quiz_b2.text = answers_temp[1]
 	quiz_b3.text = answers_temp[2]
 	quiz_b4.text = answers_temp[3]
-	await(quiz_b1.pressed or quiz_b2.pressed or quiz_b3.pressed or quiz_b4.pressed)
-	if true:
-		print("asddf?? idk what this code is bro")
+	await(answered)
+	if (selected_button == 1 and quiz_b1.text == correct_answer_temp) or (selected_button == 2 and quiz_b2.text == correct_answer_temp) or (selected_button == 3 and quiz_b3.text == correct_answer_temp) or (selected_button == 4 and quiz_b4.text == correct_answer_temp):
+		return(true)
 	else:
-		print("haha u gots wrong lmao")
+		return(false)
+
+func _on_answer_1_pressed() -> void:
+	selected_button = 1
+	answered.emit()
+
+func _on_answer_2_pressed() -> void:
+	selected_button = 2
+	answered.emit()
+
+func _on_answer_3_pressed() -> void:
+	selected_button = 3
+	answered.emit()
+
+func _on_answer_4_pressed() -> void:
+	selected_button = 4
+	answered.emit()
