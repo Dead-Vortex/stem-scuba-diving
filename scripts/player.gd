@@ -89,6 +89,7 @@ func _on_oxygen_tick() -> void:
 	oxygen -= 1
 	if oxygen < 1:
 		global_position = Vector2(0, 0)
+		trash = 0
 	
 func replenish_oxygen() -> void:
 	while oxygen < max_oxygen and !water:

@@ -6,12 +6,14 @@ extends Node2D
 @onready var ui : Control = $Shop
 @onready var ui_select = $Shop/PanelContainer/VBoxContainer
 @onready var ui_questions = $Shop/PanelContainer/Questions
+@onready var ui_results = $Shop/PanelContainer/Result
+@onready var sell_button = $Shop/PanelContainer/VBoxContainer/SellTrash
 var is_player_interactable : bool = false
 var is_player_interacting : bool = false
 
 var questions : Array = [
 	# Format for adding new questions:
-	# ["Question", "Correct Answer", "Incorrect 1", "Incorrect 2", "Incorrect 3"]
+	# ["Question", "Correct Answer", "Incorrect 1", "Incorrect 2", "Incorrect 3"],
 	# Add a comma after each question!
 ["What color is the ocean?", "Blue", "Purple", "Orange", "Merange"],
 ["What currency does this game use?", "Doubloons", "Dollars", "Euros", "Trash"],
@@ -24,8 +26,12 @@ var questions : Array = [
 @onready var quiz_b4 = $Shop/PanelContainer/Questions/Answers/Column2/Answer4
 var selected_button : int
 var education_modifier : float = 1
+var correct_answer : String
 var correctness : bool = false
 signal answered
+
+@onready var results_text = $Shop/PanelContainer/Result/RichTextLabel
+@onready var next_button = $Shop/PanelContainer/Result/NextQuestion
 
 func _process(_delta) -> void:
 	if Input.is_action_just_pressed("interact") and is_player_interactable and !is_player_interacting:
@@ -40,9 +46,13 @@ func open_shop() -> void:
 	else:
 		player.facing = "left"
 		player.sprite.flip_h = true
-		
+	
 	ui.visible = true
 	ui_select.visible = true
+	if player.trash == 0:
+		sell_button.disabled = true
+	else:
+		sell_button.disabled = false
 
 func close_shop() -> void:
 	is_player_interacting = false
@@ -50,6 +60,7 @@ func close_shop() -> void:
 	ui.visible = false
 	ui_select.visible = false
 	ui_questions.visible = false
+	ui_results.visible = false
 	
 
 func _player_enters_npc_interact_zone(body) -> void:
@@ -66,31 +77,39 @@ func _on_exit_shop_button_pressed() -> void:
 	close_shop()
 
 func _on_trash_sold() -> void:
-	if player.trash != 0:
-		ui_select.visible = false
-		ui_questions.visible = true
-		education_modifier = 1
-		for _i in range(5):
-			correctness = await(ask_question(randi_range(0, 1)))
-			if correctness:
-				education_modifier += 0.2
-		print(str(int((education_modifier - 1) * 5)) + "/5 correct")
-		close_shop()
-		player.money += round(player.trash * education_modifier * randf_range(0.9, 1.2))
-		player.trash = 0
+	education_modifier = 1
+	next_button.text = "Next Question"
+	for i in range(5):
+		correctness = await(ask_question(randi_range(0, 1)))
+		if correctness:
+			education_modifier += 0.5
+		ui_questions.visible = false
+		ui_results.visible = true
+		if i < 4:
+			results_text.text = (("Correct!" if correctness else "Incorrect!") + "\n\nCorrect answer: " + correct_answer)
+		else:
+			results_text.text = (("Correct!" if correctness else "Incorrect!") + "\nCorrect answer: " + correct_answer + "\n" + str(int((education_modifier - 1) * 2)) + "/5 Correct")
+			next_button.text = "Sell"
+		await(next_button.pressed)
+	close_shop()
+	player.money += round(player.trash * education_modifier * randf_range(0.9, 1.2))
+	player.trash = 0
 
 
 func ask_question(index) -> bool:
+	ui_select.visible = false
+	ui_results.visible = false
+	ui_questions.visible = true
 	question_text.text = questions[index][0]
 	var answers_temp = [questions[index][1], questions[index][2], questions[index][3], questions[index][4]]
-	var correct_answer_temp = answers_temp[0]
+	correct_answer = answers_temp[0]
 	answers_temp.shuffle()
 	quiz_b1.text = answers_temp[0]
 	quiz_b2.text = answers_temp[1]
 	quiz_b3.text = answers_temp[2]
 	quiz_b4.text = answers_temp[3]
 	await(answered)
-	if (selected_button == 1 and quiz_b1.text == correct_answer_temp) or (selected_button == 2 and quiz_b2.text == correct_answer_temp) or (selected_button == 3 and quiz_b3.text == correct_answer_temp) or (selected_button == 4 and quiz_b4.text == correct_answer_temp):
+	if (selected_button == 1 and quiz_b1.text == correct_answer) or (selected_button == 2 and quiz_b2.text == correct_answer) or (selected_button == 3 and quiz_b3.text == correct_answer) or (selected_button == 4 and quiz_b4.text == correct_answer):
 		return(true)
 	else:
 		return(false)

@@ -2,7 +2,7 @@ extends Node
 
 var trash = preload("res://scenes/trash.tscn")
 @export var initial_count : int = 100
-var sprites = [preload("res://assets/trash/trash1.png"), preload("res://assets/trash/trash2.png")]
+var sprites = [preload("res://assets/trash/trash1.png"), preload("res://assets/trash/trash2.png"), preload("res://assets/trash/trash3.png")]
 
 func spawn_garbage(count) -> void:
 	for i in count:

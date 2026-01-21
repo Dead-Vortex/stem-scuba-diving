@@ -118,8 +118,8 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 text = "Correct/Incorrect!
-
-n/10 Correct"
+Correct answer: Text
+n/5 Correct"
 horizontal_alignment = 1
 vertical_alignment = 1
 
