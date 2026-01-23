@@ -8,5 +8,5 @@ extends Node
 
 func _process(_delta : float) -> void:
 	oxygen_display.text = str(player.oxygen)
-	trash_display.text = str(player.trash)
+	trash_display.text = (str(player.trash) + "/" + str(player.max_trash))
 	money_display.text = str(player.money)

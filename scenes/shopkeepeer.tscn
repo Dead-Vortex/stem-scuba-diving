@@ -52,24 +52,40 @@ layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(116.18, 0)
+[node name="ScrollContainer" type="ScrollContainer" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(138.86, 0)
 layout_mode = 2
 
-[node name="FlipperBuy" type="Button" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(128.125, 0)
+layout_mode = 2
+
+[node name="FlipperBuy" type="Button" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Flipper Upgrade"
 autowrap_mode = 2
 
-[node name="TankBuy" type="Button" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="TrashBuy" type="Button" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Trash Capacity Upgrade"
+autowrap_mode = 2
+
+[node name="VacuumBuy" type="Button" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Trash Vacuum Upgrade"
+autowrap_mode = 2
+
+[node name="TankBuy" type="Button" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Oxygen Tank Upgrade"
 autowrap_mode = 2
 
 [node name="InfoBox" type="VBoxContainer" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(190.47, 0)
+custom_minimum_size = Vector2(173.625, 0)
 layout_mode = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer/InfoBox"]
@@ -88,6 +104,7 @@ vertical_alignment = 1
 
 [node name="PurchaseButton" type="Button" parent="Shop/PanelContainer/VBoxContainer/HBoxContainer/InfoBox"]
 layout_mode = 2
+disabled = true
 text = "Buy (Ð0)"
 
 [node name="Exit" type="Button" parent="Shop/PanelContainer/VBoxContainer"]
@@ -97,7 +114,9 @@ text = "Exit"
 
 [connection signal="body_entered" from="InteractZone" to="." method="_player_enters_npc_interact_zone"]
 [connection signal="body_exited" from="InteractZone" to="." method="_player_exits_npc_interact_zone"]
-[connection signal="pressed" from="Shop/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/FlipperBuy" to="." method="_on_flipper_upgrade_selected"]
-[connection signal="pressed" from="Shop/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/TankBuy" to="." method="_on_oxygen_upgrade_selected"]
+[connection signal="pressed" from="Shop/PanelContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/FlipperBuy" to="." method="_on_flipper_upgrade_selected"]
+[connection signal="pressed" from="Shop/PanelContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/TrashBuy" to="." method="_on_trash_upgrade_selected"]
+[connection signal="pressed" from="Shop/PanelContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/VacuumBuy" to="." method="_on_vacuum_upgrade_selected"]
+[connection signal="pressed" from="Shop/PanelContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/TankBuy" to="." method="_on_oxygen_upgrade_selected"]
 [connection signal="pressed" from="Shop/PanelContainer/VBoxContainer/HBoxContainer/InfoBox/PurchaseButton" to="." method="_on_purchased"]
 [connection signal="pressed" from="Shop/PanelContainer/VBoxContainer/Exit" to="." method="_on_exit_shop_button_pressed"]

@@ -49,20 +49,54 @@ func _on_flipper_upgrade_selected() -> void:
 	selected_item = "flipper"
 	info_text.text = "Flipper Upgrade:\nIncreases Swim Speed by 5%"
 	purchase_button.text = purchase_text + "20)"
+	if player.money < 20:
+		purchase_button.disabled = true
+	else:
+		purchase_button.disabled = false
+
+func _on_trash_upgrade_selected() -> void:
+	selected_item = "trash"
+	info_text.text = "Trash Capacity Upgrade:\nIncreases amount of trash able to be carried at once by 4"
+	purchase_button.text = purchase_text + "30)"
+	if player.money < 30:
+		purchase_button.disabled = true
+	else:
+		purchase_button.disabled = false
+
+func _on_vacuum_upgrade_selected() -> void:
+	selected_item = "vacuum"
+	info_text.text = "Trash Vacuum Upgrade:\nSuck trash towards you to collect it faster"
+	purchase_button.text = purchase_text + "40)"
+	if player.money < 40:
+		purchase_button.disabled = true
+	else:
+		purchase_button.disabled = false
 
 func _on_oxygen_upgrade_selected() -> void:
 	selected_item = "oxygen"
 	info_text.text = "Oxygen Tank Upgrade:\nIncreases Oxygen capacity by 15 seconds"
-	purchase_button.text = purchase_text + "75)"
-
+	purchase_button.text = purchase_text + "50)"
+	if player.money < 50:
+		purchase_button.disabled = true
+	else:
+		purchase_button.disabled = false
 
 func _on_purchased() -> void:
 	if selected_item == "flipper":
 		if player.money >= 20:
 			player.money -= 20
 			player.swim_speed += 5
+	elif selected_item == "trash":
+		if player.money >= 30:
+			player.money -= 30
+			player.max_trash += 4
+	elif selected_item == "vacuum":
+		if player.money >= 40:
+			player.money -= 40
+			player.vacuum_speed += 1
+			player.vacuum_distance += 75
 	elif selected_item == "oxygen":
-		if player.money >= 75:
-			player.money -= 75
+		if player.money >= 50:
+			player.money -= 50
 			player.oxygen = player.max_oxygen + 15
 			player.max_oxygen += 15

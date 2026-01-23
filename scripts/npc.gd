@@ -3,6 +3,8 @@ extends Node2D
 @onready var interact_zone : Area2D = $InteractZone
 @onready var button : Sprite2D = $ButtonPrompt
 @export var player : CharacterBody2D
+@export var trash_spawner : Node
+@export var fish_spawner : Node
 @onready var ui : Control = $Shop
 @onready var ui_select = $Shop/PanelContainer/VBoxContainer
 @onready var ui_questions = $Shop/PanelContainer/Questions
@@ -10,6 +12,7 @@ extends Node2D
 @onready var sell_button = $Shop/PanelContainer/VBoxContainer/SellTrash
 var is_player_interactable : bool = false
 var is_player_interacting : bool = false
+var sell_value : int = 0
 
 var questions : Array = [
 	# Format for adding new questions:
@@ -89,10 +92,14 @@ func _on_trash_sold() -> void:
 			results_text.text = (("Correct!" if correctness else "Incorrect!") + "\n\nCorrect answer: " + correct_answer)
 		else:
 			results_text.text = (("Correct!" if correctness else "Incorrect!") + "\nCorrect answer: " + correct_answer + "\n" + str(int((education_modifier - 1) * 2)) + "/5 Correct")
-			next_button.text = "Sell"
+			sell_value = round(player.trash * education_modifier * randf_range(0.9, 1.2))
+			next_button.text = "Sell (Ð" + str(sell_value) + ")"
 		await(next_button.pressed)
+	fish_spawner.spawn_fish(player.trash * 2)
+	if trash_spawner.get_child_count() < trash_spawner.initial_count / 10:
+		trash_spawner.spawn_garbage(trash_spawner.initial_count / 2)
 	close_shop()
-	player.money += round(player.trash * education_modifier * randf_range(0.9, 1.2))
+	player.money += sell_value
 	player.trash = 0
 
 

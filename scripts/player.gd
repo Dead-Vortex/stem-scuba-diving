@@ -24,7 +24,11 @@ var oxygen : int = max_oxygen
 @onready var oxygen_timer : Timer = $OxygenTimer
 
 var trash : int = 0
+var max_trash : int = 8
 var money : int = 0
+
+var vacuum_speed : int = 1
+var vacuum_distance : int = 0
 
 func _ready() -> void:
 	sprite.play("idle")
