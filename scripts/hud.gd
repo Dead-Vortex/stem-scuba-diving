@@ -1,4 +1,4 @@
-extends Node
+extends CanvasLayer
 
 @onready var oxygen_display : RichTextLabel = $HBoxContainer/Oxygen
 @onready var trash_display : RichTextLabel = $HBoxContainer/Trash
@@ -10,3 +10,6 @@ func _process(_delta : float) -> void:
 	oxygen_display.text = str(player.oxygen)
 	trash_display.text = (str(player.trash) + "/" + str(player.max_trash))
 	money_display.text = str(player.money)
+
+func mobile() -> void:
+	scale = Vector2(2, 2)

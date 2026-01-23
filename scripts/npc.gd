@@ -136,3 +136,8 @@ func _on_answer_3_pressed() -> void:
 func _on_answer_4_pressed() -> void:
 	selected_button = 4
 	answered.emit()
+
+
+func mobile() -> void:
+	ui.scale = Vector2(2, 2)
+	ui.position += Vector2(-100, 75)

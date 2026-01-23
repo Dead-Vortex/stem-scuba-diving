@@ -100,3 +100,9 @@ func _on_purchased() -> void:
 			player.money -= 50
 			player.oxygen = player.max_oxygen + 15
 			player.max_oxygen += 15
+
+
+
+func mobile() -> void:
+	ui.scale = Vector2(2, 2)
+	ui.position += Vector2(-140, 70)
