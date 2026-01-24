@@ -73,9 +73,10 @@ size = Vector2(560, 332)
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Player" parent="." node_paths=PackedStringArray("npc1", "npc2") instance=ExtResource("1_o5qli")]
+[node name="Player" parent="." node_paths=PackedStringArray("npc1", "npc2", "trash_spawner") instance=ExtResource("1_o5qli")]
 npc1 = NodePath("../NPC")
 npc2 = NodePath("../NPC2")
+trash_spawner = NodePath("../TrashSpawner")
 
 [node name="NPC" parent="." node_paths=PackedStringArray("player", "trash_spawner", "fish_spawner") instance=ExtResource("2_sugp2")]
 position = Vector2(233, 90)
@@ -152,6 +153,11 @@ shape = SubResource("RectangleShape2D_jyhfs")
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Water/MapBoundaries"]
 position = Vector2(24000, -9000)
 scale = Vector2(0.5866885, 56.986675)
+shape = SubResource("RectangleShape2D_jyhfs")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Water/MapBoundaries"]
+position = Vector2(0, -14776)
+scale = Vector2(8738.51, 1)
 shape = SubResource("RectangleShape2D_jyhfs")
 
 [node name="TrashSpawner" type="Node" parent="."]

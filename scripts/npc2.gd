@@ -93,8 +93,9 @@ func _on_purchased() -> void:
 	elif selected_item == "vacuum":
 		if player.money >= 40:
 			player.money -= 40
+			player.vacuum_toggle = true
 			player.vacuum_speed += 1
-			player.vacuum_distance += 75
+			player.vacuum_distance += 25
 	elif selected_item == "oxygen":
 		if player.money >= 50:
 			player.money -= 50

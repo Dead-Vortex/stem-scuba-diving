@@ -17,7 +17,7 @@ func _process(delta: float) -> void:
 		dir = "down"
 	elif init_height + float_distance < global_position.y and dir == "down":
 		dir = "up"
-	if global_position.distance_to(player.global_position) < player.vacuum_distance and player.trash < player.max_trash:
+	if global_position.distance_to(player.global_position) < player.vacuum_distance and player.trash < player.max_trash and global_position.y > 200 and player.vacuum_toggle:
 		global_position += Vector2((player.global_position - global_position) * player.vacuum_speed * delta)
 
 func _on_trash_collected(body: Node2D) -> void:

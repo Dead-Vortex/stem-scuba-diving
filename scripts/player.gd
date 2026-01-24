@@ -23,12 +23,17 @@ var max_oxygen : int = 30
 var oxygen : int = max_oxygen
 @onready var oxygen_timer : Timer = $OxygenTimer
 
+var death_pos : Vector2 = Vector2(0, 0)
+var death_trash_count : int = 0
+@export var trash_spawner : Node
+
 var trash : int = 0
 var max_trash : int = 8
 var money : int = 0
 
 var vacuum_speed : int = 1
-var vacuum_distance : int = 0
+var vacuum_distance : int = 50
+var vacuum_toggle : bool = false
 
 func _ready() -> void:
 	sprite.play("idle")
@@ -92,8 +97,12 @@ func _process(_delta) -> void:
 func _on_oxygen_tick() -> void:
 	oxygen -= 1
 	if oxygen < 1:
-		global_position = Vector2(0, 0)
+		death_pos = global_position
+		death_trash_count = trash
+		global_position = Vector2(0, 120)
 		trash = 0
+		trash_spawner.lose_trash(death_pos, death_trash_count)
+		
 	
 func replenish_oxygen() -> void:
 	while oxygen < max_oxygen and !water:
