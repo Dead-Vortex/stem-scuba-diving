@@ -25,6 +25,8 @@ func lose_trash(position : Vector2, count : int):
 		var trash_instance = trash.instantiate()
 		add_child(trash_instance)
 		trash_instance.global_position = Vector2(randf_range(position.x - 150, position.x + 150), randf_range(position.y - 150, position.y + 150))
+		if trash_instance.global_position.y < 300:
+			trash_instance.global_position.y += 300
 		trash_instance.get_node("Sprite2D").set_texture(sprites.pick_random())
 
 func _ready() -> void:

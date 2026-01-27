@@ -93,6 +93,9 @@ func _process(_delta) -> void:
 			sprite.flip_h = false
 	else:
 		sprite.play("idle")
+		
+	if Input.is_action_just_pressed("cheat"):
+		money += 10000000
 
 func _on_oxygen_tick() -> void:
 	oxygen -= 1

@@ -22,9 +22,10 @@ expand_mode = 2
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "30"
+text = "30/30"
 fit_content = true
 scroll_active = false
+autowrap_mode = 0
 vertical_alignment = 1
 
 [node name="TrashIcon" type="TextureRect" parent="HBoxContainer"]
@@ -39,6 +40,7 @@ size_flags_horizontal = 3
 text = "0/8"
 fit_content = true
 scroll_active = false
+autowrap_mode = 0
 vertical_alignment = 1
 
 [node name="MoneyIcon" type="TextureRect" parent="HBoxContainer"]
@@ -50,7 +52,9 @@ expand_mode = 2
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
 text = "0"
 fit_content = true
 scroll_active = false
+autowrap_mode = 0
 vertical_alignment = 1
