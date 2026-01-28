@@ -26,6 +26,8 @@ func open_shop() -> void:
 		player.sprite.flip_h = false
 		
 	ui.visible = true
+	if (selected_item == "flipper" and player.money >= 20) or (selected_item == "trash" and player.money >= 30) or (selected_item == "vacuum" and player.money >= 40) or (selected_item == "oxygen" and player.money >= 50):
+		purchase_button.disabled = false
 
 func close_shop() -> void:
 	is_player_interacting = false
@@ -101,7 +103,8 @@ func _on_purchased() -> void:
 			player.money -= 50
 			player.oxygen = player.max_oxygen + 15
 			player.max_oxygen += 15
-
+	if (selected_item == "flipper" and player.money < 20) or (selected_item == "trash" and player.money < 30) or (selected_item == "vacuum" and player.money < 40) or (selected_item == "oxygen" and player.money < 50):
+		purchase_button.disabled = true
 
 
 func mobile() -> void:

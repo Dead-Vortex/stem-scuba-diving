@@ -18,7 +18,7 @@ var questions : Array = [
 	# Format for adding new questions:
 	# ["Question", "Correct Answer", "Incorrect 1", "Incorrect 2", "Incorrect 3"],
 	# Add a comma after each question!
-["What color is the ocean?", "Blue", "Purple", "Orange", "Merange"],
+["How much trash is dumped into the ocean every year?", "5 million tons", "7 pieces", "10 million tons", "2 million tons"],
 ["What currency does this game use?", "Doubloons", "Dollars", "Euros", "Trash"],
 ]
 

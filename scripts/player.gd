@@ -69,13 +69,13 @@ func _physics_process(delta) -> void:
 		oxygen_timer.start(1)
 	if global_position.y < 200 and water:
 		water = false
-		velocity.y -= 200
+		velocity.y -= (200 if not climbable else 250)
 		oxygen_timer.stop()
 		replenish_oxygen()
 		
 		
-	if (Input.is_action_pressed("up") or Input.is_action_pressed("jump")) and climbable:
-		velocity.y -= 25
+	#if (Input.is_action_pressed("up") or Input.is_action_pressed("jump")) and climbable:
+	#	velocity.y -= 25
 	
 	move_and_slide()
 
@@ -109,7 +109,7 @@ func _on_oxygen_tick() -> void:
 	
 func replenish_oxygen() -> void:
 	while oxygen < max_oxygen and !water:
-		await get_tree().create_timer(0.05).timeout
+		await get_tree().create_timer(0.025).timeout
 		oxygen += 1
 
 func _dock_climbable(_body) -> void:
