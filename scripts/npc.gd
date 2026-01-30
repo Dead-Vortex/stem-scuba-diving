@@ -95,9 +95,10 @@ func _on_trash_sold() -> void:
 			sell_value = round(player.trash * education_modifier * randf_range(0.9, 1.2))
 			next_button.text = "Sell (Ð" + str(sell_value) + ")"
 		await(next_button.pressed)
-	fish_spawner.spawn_fish(player.trash * 2)
 	if trash_spawner.get_child_count() < 30:
 		trash_spawner.spawn_garbage(5, 25, 70)
+	else:
+		fish_spawner.spawn_fish(player.trash * 2)
 	close_shop()
 	player.money += sell_value
 	player.trash = 0

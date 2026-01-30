@@ -9,7 +9,7 @@ extends CanvasLayer
 func _process(_delta : float) -> void:
 	oxygen_display.text = (str(player.oxygen) + "/" + str(player.max_oxygen))
 	trash_display.text = (str(player.trash) + "/" + str(player.max_trash))
-	money_display.text = str(player.money)
+	money_display.text = ("Ð" + str(player.money))
 
 func mobile() -> void:
 	scale = Vector2(2, 2)
