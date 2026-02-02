@@ -1,6 +1,14 @@
-[gd_scene load_steps=24 format=3 uid="uid://cl7jocu2jqmle"]
+[gd_scene load_steps=26 format=3 uid="uid://cl7jocu2jqmle"]
 
 [ext_resource type="Texture2D" uid="uid://c5rrr746ld3rl" path="res://assets/crackhead.png" id="1_t41bf"]
+[ext_resource type="Texture2D" uid="uid://lh1dkt8eqa74" path="res://assets/ui/dialoguetrianglething.png" id="2_ffxdd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t41bf"]
+bg_color = Color(0.1, 0.1, 0.1, 0.78431374)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ffxdd"]
 atlas = ExtResource("1_t41bf")
@@ -157,9 +165,40 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Node2D" type="Node2D"]
+[node name="DialogueBox" type="CanvasLayer"]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
+offset_left = 150.0
+offset_top = 500.0
+offset_right = 1150.0
+offset_bottom = 700.0001
+theme_override_styles/panel = SubResource("StyleBoxFlat_t41bf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PanelContainer"]
+position = Vector2(100, 100)
+scale = Vector2(0.34, 0.34)
 sprite_frames = SubResource("SpriteFrames_wvuqq")
-frame_progress = 0.18932243
 speed_scale = 2.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 5
+
+[node name="Textbox" type="RichTextLabel" parent="PanelContainer/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(770, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+text = "According to all known laws of aviation, there is no way a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don't care what humans think is impossible. Yellow, black. Yellow, black. Yellow, black. Yellow, black. Ooh, black and yellow! Let's shake it up a little. Barry! Breakfast is ready! Ooming! Hang on a second. Hello? - Barry? - Adam?"
+
+[node name="TriangleThing" type="Sprite2D" parent="PanelContainer"]
+visible = false
+position = Vector2(970, 170)
+scale = Vector2(0.23437518, 0.23437518)
+texture = ExtResource("2_ffxdd")

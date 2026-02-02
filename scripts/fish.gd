@@ -1,8 +1,9 @@
 extends Node2D
 @onready var sprite = get_node("Sprite2D")
 
-var speed : int = randi_range(45, 60)
+var speed : int = randi_range(45, 60) * 100
 var bounces : int = 0
+var max_bounces : int = randi_range(3, 6)
 var dir : String = "left"
 
 func _ready() -> void:
@@ -21,14 +22,14 @@ func _process(delta: float) -> void:
 	if (dir == "left" and global_position.x < -7000):
 		dir = "right"
 		sprite.flip_h = true
-		if bounces >= 5:
+		if bounces >= max_bounces:
 			queue_free()
 		else:
 			bounces += 1
 	elif (dir == "right" and global_position.x > 7000):
 		dir = "left"
 		sprite.flip_h = false
-		if bounces >= 5:
+		if bounces >= max_bounces:
 			queue_free()
 		else:
 			bounces += 1
