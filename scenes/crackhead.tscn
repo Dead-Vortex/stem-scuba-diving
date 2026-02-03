@@ -1,5 +1,6 @@
-[gd_scene load_steps=26 format=3 uid="uid://cl7jocu2jqmle"]
+[gd_scene load_steps=30 format=3 uid="uid://cl7jocu2jqmle"]
 
+[ext_resource type="Script" uid="uid://dtx0mamguq6f0" path="res://scripts/tutorial.gd" id="1_pkf3b"]
 [ext_resource type="Texture2D" uid="uid://c5rrr746ld3rl" path="res://assets/crackhead.png" id="1_t41bf"]
 [ext_resource type="Texture2D" uid="uid://lh1dkt8eqa74" path="res://assets/ui/dialoguetrianglething.png" id="2_ffxdd"]
 
@@ -165,7 +166,30 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wvuqq"]
+atlas = ExtResource("2_ffxdd")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mec3p"]
+atlas = ExtResource("2_ffxdd")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i142b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wvuqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mec3p")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="DialogueBox" type="CanvasLayer"]
+script = ExtResource("1_pkf3b")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 offset_left = 150.0
@@ -197,8 +221,10 @@ layout_mode = 2
 theme_override_font_sizes/normal_font_size = 22
 text = "According to all known laws of aviation, there is no way a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don't care what humans think is impossible. Yellow, black. Yellow, black. Yellow, black. Yellow, black. Ooh, black and yellow! Let's shake it up a little. Barry! Breakfast is ready! Ooming! Hang on a second. Hello? - Barry? - Adam?"
 
-[node name="TriangleThing" type="Sprite2D" parent="PanelContainer"]
+[node name="TriangleThing" type="AnimatedSprite2D" parent="PanelContainer"]
 visible = false
 position = Vector2(970, 170)
 scale = Vector2(0.23437518, 0.23437518)
-texture = ExtResource("2_ffxdd")
+sprite_frames = SubResource("SpriteFrames_i142b")
+frame_progress = 0.18052228
+speed_scale = 0.2

@@ -61,4 +61,3 @@ autowrap_mode = 0
 vertical_alignment = 1
 
 [node name="DialogueBox" parent="." instance=ExtResource("5_uo2fv")]
-visible = false
