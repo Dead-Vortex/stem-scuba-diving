@@ -20,7 +20,9 @@ func dialogue(text) -> void:
 func _ready() -> void:
 	sprite.play("default")
 	triangle.play("default")
-	await(dialogue("ajsjdfaslkfasjlkdflkas;djf;laskdjfl;kasdjfl;kasdj;lasdjflkkassfjdl;asdkjf . auhsdf?DSAfasdF?asD?FasD?F?DS?Fasdfasdojfaslk;djf"))
+	await get_tree().create_timer(3).timeout
+#	visible = true
+#	await(dialogue(""))
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	emit_signal("progress_dialogue")

@@ -1,7 +1,7 @@
 extends Node2D
 @onready var sprite = get_node("Sprite2D")
 
-var speed : int = randi_range(45, 60) * 100
+var speed : int = randi_range(45, 60)
 var bounces : int = 0
 var max_bounces : int = randi_range(3, 6)
 var dir : String = "left"
