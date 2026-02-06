@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://g7q34cmr80m5"
-path="res://.godot/imported/uh oh.png-0450de4492d5ca1b50203feecddea21c.ctex"
+uid="uid://ckuaxnt4825ox"
+path="res://.godot/imported/tutorial_player_spritesheet.png-f21a4ef6060fb1e86519474b6967126d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/uh oh.png"
-dest_files=["res://.godot/imported/uh oh.png-0450de4492d5ca1b50203feecddea21c.ctex"]
+source_file="res://assets/tutorial_player_spritesheet.png"
+dest_files=["res://.godot/imported/tutorial_player_spritesheet.png-f21a4ef6060fb1e86519474b6967126d.ctex"]
 
 [params]
 
