@@ -19,7 +19,16 @@ var questions : Array = [
 	# ["Question", "Correct Answer", "Incorrect 1", "Incorrect 2", "Incorrect 3"],
 	# Add a comma after each question!
 ["How much trash is dumped into the ocean every year?", "5 million tons", "7 pieces", "10 million tons", "2 million tons"],
-["What currency does this game use?", "Doubloons", "Dollars", "Euros", "Trash"],
+["How many marine animals die every year?", "100 million", "No more than 5", "1 billion", "50 million"],
+["Which country contributes the most trash to the ocean yearly?", "China", "United States", "Vietnam", "Indonesia"],
+["How long does it take for fishing lines to break down?", "600 years", "7 and a half minutes", "200 years", "10 years"],
+["How long does it take for plastic bags to break down?", "20 years", "100 years", "500 years", "1 minute"],
+["When was plastic invented?", "1907", "2006", "1846", "1874"],
+["What is the most common type of ocean pollution by volume?", "Plastic waste", "Oil spills", "Chemical runoff", "Sewage"],
+["Which ocean pollutant is most responsible for harming marine animals through ingestion?", "Plastic waste", "Salt", "Sand", "Seaweed"],
+["What gas from burning fossil fuels contributes to ocean acidification?", "Carbon dioxide", "Oxygen", "Nitrogen", "Methane"],
+["What term describes areas of the ocean with very low oxygen caused by pollution?", "Dead zones", "Coral reefs", "Upwelling zones", "Kelp forests"],
+["Which source contributes the majority of plastic waste found in the ocean?", "Land-based sources", "Fishing activities", "Shipping transport", "Deep-sea vents"],
 ]
 
 @onready var question_text = $Shop/PanelContainer/Questions/RichTextLabel
@@ -83,7 +92,7 @@ func _on_trash_sold() -> void:
 	education_modifier = 1
 	next_button.text = "Next Question"
 	for i in range(5):
-		correctness = await(ask_question(randi_range(0, 1)))
+		correctness = await(ask_question(randi_range(0, len(questions) - 1)))
 		if correctness:
 			education_modifier += 0.5
 		ui_questions.visible = false
