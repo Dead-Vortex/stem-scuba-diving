@@ -32,7 +32,7 @@ var max_trash : int = 8
 var money : int = 0
 
 var vacuum_speed : int = 1
-var vacuum_distance : int = 50
+var vacuum_distance : int = 65
 var vacuum_toggle : bool = false
 
 func _ready() -> void:

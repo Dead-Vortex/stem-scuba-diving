@@ -96,7 +96,7 @@ func _on_trash_sold() -> void:
 			next_button.text = "Sell (Ð" + str(sell_value) + ")"
 		await(next_button.pressed)
 	if trash_spawner.get_child_count() < 30:
-		trash_spawner.spawn_garbage(5, 25, 70)
+		trash_spawner.spawn_garbage(round(0.1 * player.max_trash), round(0.4 * player.max_trash), round(0.7 * player.max_trash))
 	else:
 		fish_spawner.spawn_fish(player.trash * 2)
 	close_shop()

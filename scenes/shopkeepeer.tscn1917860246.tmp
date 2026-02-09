@@ -30,7 +30,7 @@ texture = ExtResource("3_8fi03")
 
 [node name="Shop" type="Control" parent="."]
 visible = false
-z_index = 60
+z_index = 5
 layout_mode = 3
 anchors_preset = 0
 offset_left = -236.0
