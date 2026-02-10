@@ -72,6 +72,10 @@ func _physics_process(delta) -> void:
 		velocity.y -= (200 if not climbable else 250)
 		oxygen_timer.stop()
 		replenish_oxygen()
+		if velocity.x < 0:
+			sprite.flip_h = true
+		else:
+			sprite.flip_h = false
 		
 		
 	#if (Input.is_action_pressed("up") or Input.is_action_pressed("jump")) and climbable:
@@ -80,7 +84,7 @@ func _physics_process(delta) -> void:
 	move_and_slide()
 
 func _process(_delta) -> void:
-	if !npc1.is_player_interacting and !npc2.is_player_interacting:
+	if !npc1.is_player_interacting and !npc2.is_player_interacting and !water:
 		if Input.get_axis("left", "right") != 0:
 			sprite.play("walk")
 		else:
@@ -91,9 +95,20 @@ func _process(_delta) -> void:
 		if Input.get_axis("left", "right") > 0 and facing == "left":
 			facing = "right"
 			sprite.flip_h = false
-	else:
+	elif !water:
 		sprite.play("idle")
-		
+	
+	else:
+		sprite.play("swim")
+		if Input.get_axis("left", "right") > 0:
+			sprite.flip_h = false
+		elif Input.get_axis("left", "right") < 0:
+			sprite.flip_h = true
+		if Input.get_axis("left", "right") == 0:
+			sprite.speed_scale = 0
+		else:
+			sprite.speed_scale = 1
+	
 	if Input.is_action_just_pressed("cheat"):
 		money += 10000000
 
