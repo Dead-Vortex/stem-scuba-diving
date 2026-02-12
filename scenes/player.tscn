@@ -168,7 +168,6 @@ position = Vector2(0, 4)
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_3vyb7")
 animation = &"swim"
-frame_progress = 0.12244958
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
@@ -177,4 +176,5 @@ shape = SubResource("CapsuleShape2D_qhqgy")
 
 [node name="OxygenTimer" type="Timer" parent="."]
 
+[connection signal="notifyoxygen" from="." to="HUD" method="_on_25_oxygen_tutorial"]
 [connection signal="timeout" from="OxygenTimer" to="." method="_on_oxygen_tick"]

@@ -35,6 +35,9 @@ var vacuum_speed : int = 1
 var vacuum_distance : int = 65
 var vacuum_toggle : bool = false
 
+var oxygentutorial = true
+signal notifyoxygen
+
 func _ready() -> void:
 	sprite.play("idle")
 
@@ -76,7 +79,7 @@ func _physics_process(delta) -> void:
 			sprite.flip_h = true
 		else:
 			sprite.flip_h = false
-		
+		sprite.rotation_degrees = 0
 		
 	#if (Input.is_action_pressed("up") or Input.is_action_pressed("jump")) and climbable:
 	#	velocity.y -= 25
@@ -100,17 +103,35 @@ func _process(_delta) -> void:
 	
 	else:
 		sprite.play("swim")
-		if Input.get_axis("left", "right") > 0:
-			sprite.flip_h = false
-		elif Input.get_axis("left", "right") < 0:
-			sprite.flip_h = true
-		if Input.get_axis("left", "right") == 0:
+		#if Input.get_axis("left", "right") > 0:
+			#sprite.flip_h = false
+		#elif Input.get_axis("left", "right") < 0:
+			#sprite.flip_h = true
+		if abs(Input.get_axis("left", "right")) > abs(Input.get_axis("up", "down")):
+			if Input.get_axis("left", "right") > 0:
+				sprite.flip_h = false
+				sprite.rotation_degrees = 0
+			elif Input.get_axis("left", "right") < 0:
+				sprite.flip_h = true
+				sprite.rotation_degrees = 0
+		else:
+			if Input.get_axis("down", "up") > 0:
+				sprite.rotation_degrees = -80
+				sprite.flip_h = false
+			elif Input.get_axis("down", "up") < 0:
+				sprite.rotation_degrees = 100
+				sprite.flip_h = false
+		if Input.get_vector("left", "right", "down", "up") == Vector2.ZERO:
 			sprite.speed_scale = 0
 		else:
 			sprite.speed_scale = 1
 	
 	if Input.is_action_just_pressed("cheat"):
 		money += 10000000
+
+	if oxygen < 26 and oxygentutorial:
+		emit_signal("notifyoxygen")
+		oxygentutorial = false
 
 func _on_oxygen_tick() -> void:
 	oxygen -= 1

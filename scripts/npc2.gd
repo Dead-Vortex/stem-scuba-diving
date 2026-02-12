@@ -11,18 +11,19 @@ var selected_item = "flipper"
 var is_player_interactable : bool = false
 var is_player_interacting : bool = false
 
-var flipper_price = 20
+var flipper_price = 10
 var flipper_upgrades = 0
 var flipper_max = 20
 
-var capacity_price = 30
+var capacity_price = 20
 var capacity_upgrades = 0
+# capacity is uncapped
 
-var vacuum_price = 40
+var vacuum_price = 30
 var vacuum_upgrades = 0
 var vacuum_max = 20
 
-var oxygen_price = 50
+var oxygen_price = 40
 var oxygen_upgrades = 0
 var oxygen_max = 14
 
