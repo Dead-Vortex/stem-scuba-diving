@@ -167,7 +167,7 @@ player = NodePath("..")
 position = Vector2(0, 4)
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_3vyb7")
-animation = &"swim"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)

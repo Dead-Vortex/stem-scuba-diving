@@ -40,6 +40,8 @@ var selected_button : int
 var education_modifier : float = 1
 var correct_answer : String
 var correctness : bool = false
+var already_asked : Array = []
+var random_question : int = 0
 signal answered
 
 @onready var results_text = $Shop/PanelContainer/Result/RichTextLabel
@@ -90,9 +92,15 @@ func _on_exit_shop_button_pressed() -> void:
 
 func _on_trash_sold() -> void:
 	education_modifier = 1
+	already_asked = []
 	next_button.text = "Next Question"
 	for i in range(5):
-		correctness = await(ask_question(randi_range(0, len(questions) - 1)))
+		random_question = randi_range(0, len(questions) - 1)
+		if i > 0 and already_asked.has(random_question):
+			while already_asked.has(random_question):
+				random_question = randi_range(0, len(questions) - 1)
+		already_asked.append(random_question)
+		correctness = await(ask_question(already_asked[-1]))
 		if correctness:
 			education_modifier += 0.5
 		ui_questions.visible = false

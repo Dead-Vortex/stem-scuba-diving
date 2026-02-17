@@ -77,8 +77,10 @@ func _physics_process(delta) -> void:
 		replenish_oxygen()
 		if velocity.x < 0:
 			sprite.flip_h = true
+			facing = "left"
 		else:
 			sprite.flip_h = false
+			facing = "right"
 		sprite.rotation_degrees = 0
 		
 	#if (Input.is_action_pressed("up") or Input.is_action_pressed("jump")) and climbable:
@@ -107,20 +109,20 @@ func _process(_delta) -> void:
 			#sprite.flip_h = false
 		#elif Input.get_axis("left", "right") < 0:
 			#sprite.flip_h = true
-		if abs(Input.get_axis("left", "right")) > abs(Input.get_axis("up", "down")):
-			if Input.get_axis("left", "right") > 0:
-				sprite.flip_h = false
-				sprite.rotation_degrees = 0
-			elif Input.get_axis("left", "right") < 0:
-				sprite.flip_h = true
-				sprite.rotation_degrees = 0
-		else:
+		if abs(Input.get_axis("left", "right")) < abs(Input.get_axis("up", "down")):
 			if Input.get_axis("down", "up") > 0:
 				sprite.rotation_degrees = -80
 				sprite.flip_h = false
 			elif Input.get_axis("down", "up") < 0:
 				sprite.rotation_degrees = 100
 				sprite.flip_h = false
+		else:
+			if Input.get_axis("left", "right") > 0:
+				sprite.flip_h = false
+				sprite.rotation_degrees = 0
+			elif Input.get_axis("left", "right") < 0:
+				sprite.flip_h = true
+				sprite.rotation_degrees = 0
 		if Input.get_vector("left", "right", "down", "up") == Vector2.ZERO:
 			sprite.speed_scale = 0
 		else:

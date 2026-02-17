@@ -44,6 +44,8 @@ func open_shop() -> void:
 	ui.visible = true
 	if (selected_item == "flipper" and (player.money < flipper_price or flipper_upgrades == flipper_max)) or (selected_item == "trash" and player.money < capacity_price) or (selected_item == "vacuum" and (player.money < vacuum_price or vacuum_upgrades == vacuum_max)) or (selected_item == "oxygen" and (player.money < oxygen_price or oxygen_upgrades == oxygen_max)):
 		purchase_button.disabled = true
+	else:
+		purchase_button.disabled = false
 	if ((selected_item == "flipper" and flipper_upgrades == flipper_max) or (selected_item == "vacuum" and vacuum_upgrades == vacuum_max) or (selected_item == "flipper" and oxygen_upgrades == oxygen_max)):
 		purchase_button.text = "SOLD OUT"
 		
