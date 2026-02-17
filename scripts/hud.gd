@@ -44,10 +44,10 @@ func mobile() -> void:
 	tutorial_container.size = Vector2(640, 100)
 
 func tutorial() -> void:
-    if is_mobile == false:
-	    tutorial_text.text = ("Use Arrow Keys or WASD to move"
+	if is_mobile == false:
+		tutorial_text.text = "Use Arrow Keys or WASD to move"
 	else:
-	    tutorial_text.text = "Use Joystick to move")
+		tutorial_text.text = "Use Joystick to move"
 	await(progress_dialogue)
 	tutorial_text.text = "Collect trash from the ocean"
 	await(progress_dialogue2)
