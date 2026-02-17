@@ -44,7 +44,10 @@ func mobile() -> void:
 	tutorial_container.size = Vector2(640, 100)
 
 func tutorial() -> void:
-	tutorial_text.text = ("Use Arrow Keys or WASD to move" if !is_mobile else "Use Joystick to move")
+    if is_mobile == false:
+	    tutorial_text.text = ("Use Arrow Keys or WASD to move"
+	else:
+	    tutorial_text.text = "Use Joystick to move")
 	await(progress_dialogue)
 	tutorial_text.text = "Collect trash from the ocean"
 	await(progress_dialogue2)
@@ -59,7 +62,7 @@ func tutorial() -> void:
 	tutorial_text.text = "Use your Doubloons to buy upgrades from the bird"
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("left") or event.is_action_pressed("right") or event.is_action_pressed("jump"):
+	if event.get_axis("left", "right") != 0 or event.is_action_pressed("jump"):
 		emit_signal("progress_dialogue")
 
 func _on_25_oxygen_tutorial() -> void:
