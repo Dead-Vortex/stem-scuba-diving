@@ -53,7 +53,7 @@ func tutorial() -> void:
 	await(progress_dialogue2)
 	tutorial_text.text = "Watch your oxygen!"
 	await(progress_dialogue3)
-	tutorial_text.text = "You can only carry so much trash with you at once"
+	tutorial_text.text = "You can only carry a maximum of 8 trash"
 	await(progress_dialogue4)
 	tutorial_text.text = "Your trash is full. Go back to the dock"
 	await(progress_dialogue5)
@@ -62,7 +62,7 @@ func tutorial() -> void:
 	tutorial_text.text = "Use your Doubloons to buy upgrades from the bird"
 
 func _input(event: InputEvent) -> void:
-	if event.get_axis("left", "right") != 0 or event.is_action_pressed("jump"):
+	if Input.get_axis("left", "right") != 0 or event.is_action_pressed("jump"):
 		emit_signal("progress_dialogue")
 
 func _on_25_oxygen_tutorial() -> void:

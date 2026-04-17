@@ -110,12 +110,14 @@ func _on_trash_sold() -> void:
 		else:
 			results_text.text = (("Correct!" if correctness else "Incorrect!") + "\nCorrect answer: " + correct_answer + "\n" + str(int((education_modifier - 1) * 2)) + "/5 Correct")
 			sell_value = round(player.trash * education_modifier * randf_range(0.9, 1.2))
+			if player.get_node("../Player/HUD").tutorial_finished == false and sell_value < 10:
+				sell_value = 12
 			next_button.text = "Sell (Ð" + str(sell_value) + ")"
 		await(next_button.pressed)
 	if trash_spawner.get_child_count() < 30:
 		trash_spawner.spawn_garbage(round(0.1 * player.max_trash), round(0.4 * player.max_trash), round(0.7 * player.max_trash))
 	else:
-		fish_spawner.spawn_fish(player.trash * 2)
+		fish_spawner.spawn_fish(player.trash * round(randf_range(0.4, 1.3)))
 	close_shop()
 	player.money += sell_value
 	player.trash = 0

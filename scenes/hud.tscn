@@ -72,7 +72,7 @@ offset_bottom = 100.0
 mouse_filter = 2
 
 [node name="TutorialText" type="RichTextLabel" parent="CenterContainer"]
-custom_minimum_size = Vector2(600, 100)
+custom_minimum_size = Vector2(650, 100)
 layout_mode = 2
 mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 26

@@ -50,7 +50,7 @@ layout_mode = 2
 [node name="RichTextLabel" type="RichTextLabel" parent="Shop/PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 67.4)
 layout_mode = 2
-text = "answer my quiz and i will give you doubloons for upgrades"
+text = "Answer my riddles, and I might give you some cash..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
